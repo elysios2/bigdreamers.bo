@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-[#f0f2f5] dark:bg-[#035380] text-foreground transition-colors duration-300;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+  }
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-gradient-to-r from-[#048abf] to-[#feba2b] bg-clip-text text-transparent;
+  }
+
+  .neumorph {
+    @apply bg-[#f0f2f5] dark:bg-[#048abf] rounded-xl shadow-[8px_8px_16px_#d1d9e6,_-8px_-8px_16px_#ffffff] dark:shadow-[8px_8px_16px_#03426a,_-8px_-8px_16px_#046499];
+  }
+
+  .neumorph-card {
+    @apply bg-[#f0f2f5] dark:bg-[#048abf] rounded-xl shadow-[8px_8px_16px_#d1d9e6,_-8px_-8px_16px_#ffffff] dark:shadow-[8px_8px_16px_#03426a,_-8px_-8px_16px_#046499];
+  }
+
+  .neumorph-inset {
+    @apply bg-[#f0f2f5] dark:bg-[#048abf] rounded-xl shadow-[inset_4px_4px_8px_#d1d9e6,_inset_-4px_-4px_8px_#ffffff] dark:shadow-[inset_4px_4px_8px_#03426a,_inset_-4px_-4px_8px_#046499];
+  }
+
+  .neumorph-btn {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  .neumorph-btn:hover {
+    @apply shadow-[6px_6px_12px_#d1d9e6,_-6px_-6px_12px_#ffffff] dark:shadow-[6px_6px_12px_#03426a,_-6px_-6px_12px_#046499] translate-y-[-2px];
+  }
+
+  .neumorph-btn:active {
+    @apply shadow-[inset_4px_4px_8px_#d1d9e6,_inset_-4px_-4px_8px_#ffffff] dark:shadow-[inset_4px_4px_8px_#03426a,_inset_-4px_-4px_8px_#046499] translate-y-0;
+  }
+
+  /* Floating buttons */
+  .floating-btn {
+    @apply fixed z-40 shadow-lg rounded-full flex items-center justify-center transition-all duration-300;
+  }
+
+  .theme-toggle-btn {
+    @apply bottom-6 right-6 w-12 h-12 bg-[#048abf] dark:bg-[#feba2b] text-white;
+  }
+  
+  .chatbot-btn {
+    @apply bottom-6 left-6 w-12 h-12 bg-[#ff0066] text-white;
+  }
+}
+
+/* Theme classes */
+.dark .text-gray-600,
+.dark .text-gray-700,
+.dark .text-gray-800 {
+  color: #d1d5db;
+}
+
+.dark .bg-\[#f0f2f5\] {
+  background-color: #048abf;
+}
+
+.dark .bg-white {
+  background-color: #048abf;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+.logo-carousel {
+  animation: scroll 20s linear infinite;
+}
