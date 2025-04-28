@@ -224,21 +224,62 @@ export default function ThreeStepForm({
       )}
 
       {/* Paso 3: Confirmación */}
-      {activeStep === 3 && (
+        {activeStep === 3 && (
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Confirmación</h3>
-          <div className="bg-gray-100 p-4 rounded">…</div>
-          <div className="flex items-center">
-            <input type="checkbox" id="terms" className="mr-2" />
-            <label htmlFor="terms" className="text-sm">
-              Acepto los{' '}
-              <a href="#" className="text-primary">
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+            Confirmación
+            </h3>
+            <p className="text-gray-600 dark:text-gray-300 mb-4">
+            Revisa los detalles de tu inversión antes de enviar:
+            </p>
+
+            <div className="bg-gray-100 dark:bg-[#03436a] p-4 rounded-lg mb-4">
+            <div className="flex justify-between py-2 border-b border-gray-200 dark:border-gray-600">
+                <span className="text-gray-600 dark:text-gray-300">Plan</span>
+                <span className="font-medium text-gray-800 dark:text-white">
+                {duration} meses ({rate}%)
+                </span>
+            </div>
+            <div className="flex justify-between py-2 border-b border-gray-200 dark:border-gray-600">
+                <span className="text-gray-600 dark:text-gray-300">Monto</span>
+                <span className="font-medium text-gray-800 dark:text-white">
+                {formData.monto} $
+                </span>
+            </div>
+            <div className="flex justify-between py-2 border-b border-gray-200 dark:border-gray-600">
+                <span className="text-gray-600 dark:text-gray-300">Fecha</span>
+                <span className="font-medium text-gray-800 dark:text-white">
+                {formData.fecha}
+                </span>
+            </div>
+            <div className="flex justify-between py-2">
+                <span className="text-gray-600 dark:text-gray-300">Rentabilidad</span>
+                <span className="font-medium text-green-600 dark:text-green-400">
+                {calcularRentabilidad()}
+                </span>
+            </div>
+            </div>
+
+            <div className="flex items-center mb-4">
+            <input
+                type="checkbox"
+                id="terms"
+                name="terms"
+                className="mr-2"
+                required
+            />
+            <label
+                htmlFor="terms"
+                className="text-sm text-gray-600 dark:text-gray-300"
+            >
+                He leído y acepto los{" "}
+                <a href="#" className="text-primary hover:underline">
                 términos y condiciones
-              </a>
+                </a>
             </label>
-          </div>
+            </div>
         </div>
-      )}
+        )}
 
       {/* Navegación */}
       <div className="flex justify-between mt-8">
