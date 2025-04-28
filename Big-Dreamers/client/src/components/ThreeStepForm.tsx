@@ -21,7 +21,7 @@ interface FormData {
 interface ThreeStepFormProps {
   rate: number;                // porcentaje de rentabilidad (e.g. 2.0)
   duration: number;            // duración en meses (e.g. 12)
-  formAction: string;          // URL de FormSubmit (e.g. "https://formsubmit.co/elysios2plantillas@gmail.com")
+  formAction: string;          // URL de FormSubmit
   formSubject?: string;        // asunto opcional del correo
   nextUrl?: string;            // URL para redirigir tras éxito
 }
@@ -45,9 +45,12 @@ export default function ThreeStepForm({
     metodo: "Transferencia bancaria",
   });
 
-  const handleNext = () =>
-    activeStep < 3 ? setActiveStep((s) => s + 1) : undefined;
-  const handlePrev = () => activeStep > 1 && setActiveStep((s) => s - 1);
+  const handleNext = () => {
+    if (activeStep < 3) setActiveStep((s) => s + 1);
+  };
+  const handlePrev = () => {
+    if (activeStep > 1) setActiveStep((s) => s - 1);
+  };
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -65,7 +68,7 @@ export default function ThreeStepForm({
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     setShowSuccess(true);
-    // el envío real lo maneja el atributo action del <form>
+    // El envío real lo maneja FormSubmit a través del atributo action
   };
 
   if (showSuccess) {
@@ -102,21 +105,25 @@ export default function ThreeStepForm({
       <input type="hidden" name="_captcha" value="false" />
       {nextUrl && <input type="hidden" name="_next" value={nextUrl} />}
 
-      {/* Paso 1: Indicador */}
+      {/* Indicador de pasos */}
       <div className="flex justify-between mb-6">
         {[1, 2, 3].map((step) => (
           <div key={step} className="relative w-1/3">
             <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-2 ${{
-                true: "bg-[#feba2b] text-white",
-              }[activeStep >= step] || "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"}`}
+              className={`w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-2 ${
+                activeStep >= step
+                  ? "bg-[#feba2b] text-white"
+                  : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
+              }`}
             >
               {step}
             </div>
             <p
-              className={`text-xs text-center ${{
-                true: "text-gray-800 dark:text-white",
-              }[activeStep >= step] || "text-gray-500 dark:text-gray-400"}`}
+              className={`text-xs text-center ${
+                activeStep >= step
+                  ? "text-gray-800 dark:text-white"
+                  : "text-gray-500 dark:text-gray-400"
+              }`}
             >
               {step === 1
                 ? "Información"
@@ -128,7 +135,7 @@ export default function ThreeStepForm({
         ))}
       </div>
 
-      {/* Paso 2: Contenido */}
+      {/* Paso 1: Información personal */}
       {activeStep === 1 && (
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">Información personal</h3>
@@ -139,7 +146,13 @@ export default function ThreeStepForm({
                   <label className="block mb-1 capitalize">{field}</label>
                   <input
                     name={field}
-                    type={field === "email" ? "email" : field === "telefono" ? "tel" : "text"}
+                    type={
+                      field === "email"
+                        ? "email"
+                        : field === "telefono"
+                        ? "tel"
+                        : "text"
+                    }
                     value={formData[field]}
                     onChange={handleChange}
                     className="w-full p-2 border rounded"
@@ -151,9 +164,11 @@ export default function ThreeStepForm({
         </div>
       )}
 
+      {/* Paso 2: Detalles de la inversión */}
       {activeStep === 2 && (
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">Detalles de la inversión</h3>
+          {/* Monto */}
           <div>
             <label className="block mb-1">Monto a invertir ($)</label>
             <div className="relative">
@@ -162,13 +177,15 @@ export default function ThreeStepForm({
               </span>
               <input
                 name="monto"
+                type="text"
                 value={formData.monto}
                 onChange={handleChange}
-                className="w-full p-2 pl-10 border rounded"
                 placeholder={`Mínimo ${duration === 12 ? 2000 : 2500}$`}
+                className="w-full p-2 pl-10 border rounded"
               />
             </div>
           </div>
+          {/* Fecha */}
           <div>
             <label className="block mb-1">Fecha de inicio</label>
             <div className="relative">
@@ -184,6 +201,7 @@ export default function ThreeStepForm({
               />
             </div>
           </div>
+          {/* Método de pago */}
           <div>
             <label className="block mb-1">Método de pago</label>
             <div className="relative">
@@ -205,31 +223,18 @@ export default function ThreeStepForm({
         </div>
       )}
 
+      {/* Paso 3: Confirmación */}
       {activeStep === 3 && (
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">Confirmación</h3>
-          <div className="bg-gray-100 p-4 rounded">
-            <div className="flex justify-between py-2 border-b">
-              <span>Plan</span>
-              <span>{duration} meses ({rate}%)</span>
-            </div>
-            <div className="flex justify-between py-2 border-b">
-              <span>Monto</span>
-              <span>{formData.monto} $</span>
-            </div>
-            <div className="flex justify-between py-2 border-b">
-              <span>Fecha</span>
-              <span>{formData.fecha}</span>
-            </div>
-            <div className="flex justify-between py-2">
-              <span>Rentabilidad</span>
-              <span>{calcularRentabilidad()}</span>
-            </div>
-          </div>
+          <div className="bg-gray-100 p-4 rounded">…</div>
           <div className="flex items-center">
             <input type="checkbox" id="terms" className="mr-2" />
             <label htmlFor="terms" className="text-sm">
-              Acepto los <a href="#" className="text-primary">términos y condiciones</a>
+              Acepto los{' '}
+              <a href="#" className="text-primary">
+                términos y condiciones
+              </a>
             </label>
           </div>
         </div>
@@ -240,14 +245,12 @@ export default function ThreeStepForm({
         <button
           type="button"
           onClick={handlePrev}
-          className={`px-4 py-2 rounded ${
-n          activeStep === 1 ? "invisible" : ""
-          }`}
+          className={`px-4 py-2 rounded ${activeStep === 1 ? 'invisible' : ''}`}
         >
           <ArrowLeft className="inline-block mr-1" /> Anterior
         </button>
         <button
-          type={activeStep === 3 ? "submit" : "button"}
+          type={activeStep === 3 ? 'submit' : 'button'}
           onClick={activeStep === 3 ? undefined : handleNext}
           className="px-6 py-2 bg-blue-600 text-white rounded flex items-center"
         >
