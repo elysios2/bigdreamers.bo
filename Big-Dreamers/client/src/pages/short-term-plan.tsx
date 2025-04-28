@@ -10,6 +10,7 @@ import {
   BarChart,
 } from "lucide-react";
 import { Link } from "wouter";
+import ThreeStepForm from "@/components/ThreeStepForm";
 
 export default function ShortTermPlan() {
   const [activeStep, setActiveStep] = useState(1);
@@ -54,13 +55,33 @@ export default function ShortTermPlan() {
     }
   };
 
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch("https://formspree.io/f/xovdjavw", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (response.ok) {
+        setShowSuccess(true);
+      } else {
+        alert("Hubo un problema al enviar el formulario. Intenta de nuevo.");
+      }
+    } catch (error) {
+      console.error("Error al enviar el formulario:", error);
+      alert("Ocurrió un error inesperado.");
+    }
+  };  
+
   const calcularRentabilidad = () => {
     const montoNumerico = parseFloat(formData.monto.replace(/[^0-9.]/g, ""));
     if (isNaN(montoNumerico)) return "N/A";
     const rentabilidadTotal = montoNumerico * 0.015 * 6;
     return `$${rentabilidadTotal.toFixed(2)}`;
   };
-
 
   return (
     <div className="min-h-screen pt-20 pb-16">
@@ -184,256 +205,18 @@ export default function ShortTermPlan() {
                     Ver
                     <ArrowRight className="h-4 w-4 ml-2 text-[#feba2b] dark:text-white" />
                 </Link>
-              </div>
+              </div> 
             </div>
 
-            {showSuccess ? (
-              <div className="neumorph-inset p-6 rounded-xl flex flex-col items-center justify-center text-center">
-                <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mb-4">
-                  <Check className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">
-                  ¡Solicitud Enviada!
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-4">
-                  Hemos recibido tu solicitud para el Plan Corto Plazo. Uno de
-                  nuestros asesores se pondrá en contacto contigo en las
-                  próximas 24 horas.
-                </p>
-                <Link href="/">
-                  <button className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-opacity-90 transition-colors">
-                    Volver al inicio
-                  </button>
-                </Link>
-              </div>
-            ) : (
-              <div className="neumorph-inset p-6 rounded-xl">
-                <div className="flex justify-between mb-6">
-                  {[1, 2, 3].map((step) => (
-                    <div
-                      key={step}
-                      className={`relative w-1/3 ${step < 3 ? 'after:content-[""] after:absolute after:top-1/2 after:left-full after:w-full after:h-0.5 after:-translate-y-1/2 after:bg-gray-300 dark:after:bg-gray-600' : ""}`}
-                    >
-                      <div
-                        className={`w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-2 ${activeStep >= step ? "bg-[#feba2b] text-white" : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"}`}
-                      >
-                        {step}
-                      </div>
-                      <p
-                        className={`text-xs text-center ${activeStep >= step ? "text-gray-800 dark:text-white" : "text-gray-500 dark:text-gray-400"}`}
-                      >
-                        {step === 1
-                          ? "Información"
-                          : step === 2
-                            ? "Monto"
-                            : "Confirmación"}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-
-                {activeStep === 1 && (
-                  <div className="space-y-4">
-                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
-                      Información personal
-                    </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                          Nombre
-                        </label>
-                        <input
-                          type="text"
-                          value={formData.nombre}
-                          onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
-                          className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-[#035380] dark:text-white"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                          Apellidos
-                        </label>
-                        <input
-                          type="text"
-                          value={formData.apellidos}
-                          onChange={(e) => setFormData({ ...formData, apellidos: e.target.value })}
-                          className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-[#035380] dark:text-white"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                          Email
-                        </label>
-                        <input
-                          type="email"
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-[#035380] dark:text-white"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                          Teléfono
-                        </label>
-                        <input
-                          type="tel"
-                          value={formData.telefono}
-                          onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
-                          className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-[#035380] dark:text-white"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {activeStep === 2 && (
-                  <div className="space-y-4">
-                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
-                      Detalles de la inversión
-                    </h3>
-                    <div className="space-y-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                          Monto a invertir ($us)
-                        </label>
-                        <div className="relative">
-                          <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500 dark:text-gray-400">
-                            <DollarSign className="h-5 w-5" />
-                          </span>
-                          <input
-                            type="text"
-                            value={formData.monto}
-                            onChange={(e) => setFormData({ ...formData, monto: e.target.value })}
-                            className="w-full p-2 pl-10 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-[#035380] dark:text-white"
-                            placeholder="Mínimo 1000$"
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                          Fecha de inicio
-                        </label>
-                        <div className="relative">
-                          <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500 dark:text-gray-400">
-                            <Calendar className="h-5 w-5" />
-                          </span>
-                          <input
-                            type="date"
-                            value={formData.fecha}
-                            onChange={(e) => setFormData({ ...formData, fecha: e.target.value })}
-                            className="w-full p-2 pl-10 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-[#035380] dark:text-white"
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                          Método de pago
-                        </label>
-                        <div className="relative">
-                          <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500 dark:text-gray-400">
-                            <Wallet className="h-5 w-5" />
-                          </span>
-                          <select
-                            value={formData.metodo}
-                            onChange={(e) => setFormData({ ...formData, metodo: e.target.value })}
-                            className="w-full p-2 pl-10 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-[#035380] dark:text-white"
-                          >
-                            <option>Transferencia bancaria</option>
-                            <option>Tarjeta de crédito</option>
-                            <option>Efectivo</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {activeStep === 3 && (
-                  <div className="space-y-4">
-                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
-                      Confirmación
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">
-                      Revisa los detalles de tu inversión antes de confirmar:
-                    </p>
-
-                    <div className="bg-gray-100 dark:bg-[#03436a] p-4 rounded-lg mb-4">
-                      <div className="flex justify-between py-2 border-b border-gray-200 dark:border-gray-600">
-                        <span className="text-gray-600 dark:text-gray-300">
-                          Plan
-                        </span>
-                        <span className="font-medium text-gray-800 dark:text-white">
-                          Corto Plazo (1.5%)
-                        </span>
-                      </div>
-                      <div className="flex justify-between py-2 border-b border-gray-200 dark:border-gray-600">
-                        <span className="text-gray-600 dark:text-gray-300">
-                          Monto
-                        </span>
-                        <span className="font-medium text-gray-800 dark:text-white">
-                          {formData.monto} $
-                        </span>
-                      </div>
-                      <div className="flex justify-between py-2 border-b border-gray-200 dark:border-gray-600">
-                        <span className="text-gray-600 dark:text-gray-300">
-                          Duración
-                        </span>
-                        <span className="font-medium text-gray-800 dark:text-white">
-                          6 meses
-                        </span>
-                      </div>
-                      <div className="flex justify-between py-2 border-b border-gray-200 dark:border-gray-600">
-                        <span className="text-gray-600 dark:text-gray-300">
-                          Fecha de inicio
-                        </span>
-                        <span className="font-medium text-gray-800 dark:text-white">
-                          {formData.fecha}
-                        </span>
-                      </div>
-                      <div className="flex justify-between py-2">
-                        <span className="text-gray-600 dark:text-gray-300">
-                          Rentabilidad 
-                        </span>
-                        <span className="font-medium text-green-600 dark:text-green-400">
-                          {calcularRentabilidad()}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center mb-4">
-                      <input type="checkbox" id="terms" className="mr-2" />
-                      <label
-                        htmlFor="terms"
-                        className="text-sm text-gray-600 dark:text-gray-300"
-                      >
-                        He leído y acepto los{" "}
-                        <a href="#" className="text-primary hover:underline">
-                          términos y condiciones
-                        </a>
-                      </label>
-                    </div>
-                  </div>
-                )}
-
-                <div className="flex justify-between mt-8">
-                  <button
-                    onClick={handlePrevStep}
-                    className={`flex items-center text-gray-700 dark:text-white px-4 py-2 rounded-lg ${activeStep === 1 ? "invisible" : ""}`}
-                  >
-                    <ArrowLeft className="h-4 w-4 mr-2" />
-                    Anterior
-                  </button>
-
-                  <button
-                    onClick={handleNextStep}
-                    className="bg-[#048abf] text-white px-6 py-2 rounded-lg hover:bg-[#feba2b] transition-colors flex items-center"
-                  >
-                    {activeStep === 3 ? "Confirmar" : "Siguiente"}
-                    {activeStep < 3 && <ArrowRight className="h-4 w-4 ml-2" />}
-                  </button>
-                </div>
-              </div>
-            )}
+            <div className="neumorph-inset p-6 rounded-xl">
+              <ThreeStepForm
+                rate={2.0}
+                duration={12}
+                formAction="https://formsubmit.co/elysios2plantillas@gmail.com"
+                formSubject="Solicitud Plan Mediano Plazo"
+                nextUrl="/gracias"
+              />
+            </div>
           </div>
         </div>
       </div>
