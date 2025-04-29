@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { useState, ChangeEvent } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -47,6 +47,7 @@ export default function ThreeStepForm({
   const handleNext = () => {
     if (activeStep < 3) setActiveStep((s) => s + 1);
   };
+
   const handlePrev = () => {
     if (activeStep > 1) setActiveStep((s) => s - 1);
   };
@@ -62,22 +63,18 @@ export default function ThreeStepForm({
     return `$${total.toFixed(2)}`;
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    console.log("Formulario enviado");
-    // Dejar que el navegador envíe normalmente a FormSubmit
-  };
-
   return (
     <form
       action={formAction}
       method="POST"
-      onSubmit={handleSubmit}
       className="neumorph p-6 md:p-8 rounded-xl"
     >
+      {/* Campos ocultos para FormSubmit */}
       <input type="hidden" name="_subject" value={formSubject} />
       <input type="hidden" name="_captcha" value="false" />
       {nextUrl && <input type="hidden" name="_next" value={nextUrl} />}
 
+      {/* Paso actual */}
       <div className="flex justify-between mb-6">
         {[1, 2, 3].map((step) => (
           <div key={step} className="relative w-1/3">
@@ -103,6 +100,7 @@ export default function ThreeStepForm({
         ))}
       </div>
 
+      {/* Paso 1 */}
       {activeStep === 1 && (
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">Información personal</h3>
@@ -124,6 +122,7 @@ export default function ThreeStepForm({
         </div>
       )}
 
+      {/* Paso 2 */}
       {activeStep === 2 && (
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">Detalles de la inversión</h3>
@@ -182,6 +181,7 @@ export default function ThreeStepForm({
         </div>
       )}
 
+      {/* Paso 3 */}
       {activeStep === 3 && (
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">Confirmación</h3>
@@ -202,6 +202,10 @@ export default function ThreeStepForm({
               <span>Rentabilidad</span>
               <span>{calcularRentabilidad()}</span>
             </div>
+            <div className="flex justify-between py-2 border-b">
+              <span>Método de pago</span>
+              <span>{formData.metodo}</span>
+            </div>
           </div>
           <div className="flex items-center">
             <input type="checkbox" id="terms" name="terms" className="mr-2" required />
@@ -212,25 +216,35 @@ export default function ThreeStepForm({
         </div>
       )}
 
+      {/* Botones navegación */}
       <div className="flex justify-between mt-8">
         <button
           type="button"
           onClick={handlePrev}
-          className={`px-4 py-2 rounded ${activeStep === 1 ? 'invisible' : ''}`}
+          disabled={activeStep === 1}
+          className={`px-4 py-2 rounded ${
+            activeStep === 1 ? "invisible" : "bg-gray-300 text-black"
+          }`}
         >
           <ArrowLeft className="inline-block mr-1" /> Anterior
         </button>
-        <button
-          type={activeStep === 3 ? 'submit' : 'button'}
-          onClick={activeStep === 3 ? undefined : handleNext}
-          className="px-6 py-2 bg-blue-600 text-white rounded flex items-center"
-        >
-          {activeStep === 3 ? (
-            <><Check className="mr-2" /> Enviar</>
-          ) : (
-            <>Siguiente <ArrowRight className="ml-1" /></>
-          )}
-        </button>
+
+        {activeStep < 3 ? (
+          <button
+            type="button"
+            onClick={handleNext}
+            className="px-6 py-2 bg-blue-600 text-white rounded flex items-center"
+          >
+            Siguiente <ArrowRight className="ml-1" />
+          </button>
+        ) : (
+          <button
+            type="submit"
+            className="px-6 py-2 bg-blue-600 text-white rounded flex items-center"
+          >
+            <Check className="mr-2" /> Enviar
+          </button>
+        )}
       </div>
     </form>
   );
