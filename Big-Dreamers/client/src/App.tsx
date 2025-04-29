@@ -12,6 +12,7 @@ import AboutUs from "@/pages/about-us";
 import Blog from "@/pages/blog";
 import InvestorGuide from "@/pages/investor-guide";
 import Startups from "@/pages/startups";
+import Gracias from "@/pages/Gracias";
 
 function Router() {
   return (
@@ -25,6 +26,7 @@ function Router() {
       <Route path="/blog" component={Blog} />
       <Route path="/investor-guide" component={InvestorGuide} />
       <Route path="/startups" component={Startups} />
+      <Route path="/gracias" component={Gracias} />
       <Route component={NotFound} />
     </Switch>
   );
