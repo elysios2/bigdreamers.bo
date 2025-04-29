@@ -215,24 +215,20 @@ export default function ThreeStepForm({
       <div className="flex justify-between mt-8">
         <button
           type="button"
-          onClick={() => {
-            if (activeStep < 3) {
-              handleNext(); // avanzar al siguiente paso
-            } else {
-              const form = document.querySelector("form");
-              if (form) form.submit(); // enviar manualmente el formulario
-            }
-          }}
+          onClick={handlePrev}
+          className={`px-4 py-2 rounded ${activeStep === 1 ? 'invisible' : ''}`}
+        >
+          <ArrowLeft className="inline-block mr-1" /> Anterior
+        </button>
+        <button
+          type={activeStep === 3 ? 'submit' : 'button'}
+          onClick={activeStep === 3 ? undefined : handleNext}
           className="px-6 py-2 bg-blue-600 text-white rounded flex items-center"
         >
           {activeStep === 3 ? (
-            <>
-              <Check className="mr-2" /> Enviar
-            </>
+            <><Check className="mr-2" /> Enviar</>
           ) : (
-            <>
-              Siguiente <ArrowRight className="ml-1" />
-            </>
+            <>Siguiente <ArrowRight className="ml-1" /></>
           )}
         </button>
       </div>
