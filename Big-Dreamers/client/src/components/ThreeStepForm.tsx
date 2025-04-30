@@ -74,7 +74,7 @@ export default function ThreeStepForm({
       <input type="hidden" name="_captcha" value="false" />
       {nextUrl && <input type="hidden" name="_next" value={nextUrl} />}
 
-      {/* Paso actual */}
+      {/* Paso actual visual */}
       <div className="flex justify-between mb-6">
         {[1, 2, 3].map((step) => (
           <div key={step} className="relative w-1/3">
@@ -100,7 +100,7 @@ export default function ThreeStepForm({
         ))}
       </div>
 
-      {/* Paso 1 */}
+      {/* Paso 1: Información personal */}
       {activeStep === 1 && (
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">Información personal</h3>
@@ -122,7 +122,7 @@ export default function ThreeStepForm({
         </div>
       )}
 
-      {/* Paso 2 */}
+      {/* Paso 2: Detalles de inversión */}
       {activeStep === 2 && (
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">Detalles de la inversión</h3>
@@ -181,7 +181,7 @@ export default function ThreeStepForm({
         </div>
       )}
 
-      {/* Paso 3 */}
+      {/* Paso 3: Confirmación */}
       {activeStep === 3 && (
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">Confirmación</h3>
@@ -198,13 +198,13 @@ export default function ThreeStepForm({
               <span>Fecha</span>
               <span>{formData.fecha}</span>
             </div>
-            <div className="flex justify-between py-2">
-              <span>Rentabilidad</span>
-              <span>{calcularRentabilidad()}</span>
-            </div>
             <div className="flex justify-between py-2 border-b">
               <span>Método de pago</span>
               <span>{formData.metodo}</span>
+            </div>
+            <div className="flex justify-between py-2">
+              <span>Rentabilidad</span>
+              <span>{calcularRentabilidad()}</span>
             </div>
           </div>
           <div className="flex items-center">
@@ -216,8 +216,9 @@ export default function ThreeStepForm({
         </div>
       )}
 
-      {/* Botones navegación */}
+      {/* Botones de navegación */}
       <div className="flex justify-between mt-8">
+        {/* Botón Anterior */}
         <button
           type="button"
           onClick={handlePrev}
@@ -229,6 +230,7 @@ export default function ThreeStepForm({
           <ArrowLeft className="inline-block mr-1" /> Anterior
         </button>
 
+        {/* Botón Siguiente o Enviar */}
         {activeStep < 3 ? (
           <button
             type="button"
@@ -238,12 +240,21 @@ export default function ThreeStepForm({
             Siguiente <ArrowRight className="ml-1" />
           </button>
         ) : (
-          <button
-            type="submit"
-            className="px-6 py-2 bg-blue-600 text-white rounded flex items-center"
-          >
-            <Check className="mr-2" /> Enviar
-          </button>
+          <div className="flex gap-4">
+            <button
+              type="button"
+              onClick={() => setActiveStep(1)}
+              className="px-6 py-2 bg-gray-400 text-white rounded hover:bg-gray-500 transition"
+            >
+              Editar información
+            </button>
+            <button
+              type="submit"
+              className="px-6 py-2 bg-[#048abf] text-white rounded flex items-center hover:bg-[#feba2b] transition"
+            >
+              <Check className="mr-2" /> Enviar
+            </button>
+          </div>
         )}
       </div>
     </form>
