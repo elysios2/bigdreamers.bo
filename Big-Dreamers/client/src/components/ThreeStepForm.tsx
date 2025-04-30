@@ -45,11 +45,17 @@ export default function ThreeStepForm({
   });
 
   const handleNext = () => {
-    if (activeStep < 3) setActiveStep((s) => s + 1);
+    if (activeStep === 2) {
+      if (!formData.monto || !formData.fecha) {
+        alert("Completa todos los campos antes de continuar.");
+        return;
+      }
+    }
+    setActiveStep((prev) => Math.min(prev + 1, 3));
   };
 
   const handlePrev = () => {
-    if (activeStep > 1) setActiveStep((s) => s - 1);
+    setActiveStep((prev) => Math.max(prev - 1, 1));
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -69,12 +75,14 @@ export default function ThreeStepForm({
       method="POST"
       className="neumorph p-6 md:p-8 rounded-xl"
     >
-      {/* Campos ocultos para FormSubmit */}
+      {/* FormSubmit hidden fields */}
       <input type="hidden" name="_subject" value={formSubject} />
       <input type="hidden" name="_captcha" value="false" />
-      {nextUrl && <input type="hidden" name="_next" value={nextUrl} />}
+      {nextUrl && (
+        <input type="hidden" name="_next" value={nextUrl} />
+      )}
 
-      {/* Paso actual visual */}
+      {/* Step indicators */}
       <div className="flex justify-between mb-6">
         {[1, 2, 3].map((step) => (
           <div key={step} className="relative w-1/3">
@@ -94,35 +102,47 @@ export default function ThreeStepForm({
                   : "text-gray-500 dark:text-gray-400"
               }`}
             >
-              {step === 1 ? "Información" : step === 2 ? "Monto" : "Confirmación"}
+              {step === 1
+                ? "Información"
+                : step === 2
+                ? "Monto"
+                : "Confirmación"}
             </p>
           </div>
         ))}
       </div>
 
-      {/* Paso 1: Información personal */}
+      {/* Paso 1 */}
       {activeStep === 1 && (
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">Información personal</h3>
           <div className="grid md:grid-cols-2 gap-4">
-            {(["nombre", "apellidos", "email", "telefono"] as const).map((field) => (
-              <div key={field}>
-                <label className="block mb-1 capitalize">{field}</label>
-                <input
-                  name={field}
-                  type={field === "email" ? "email" : field === "telefono" ? "tel" : "text"}
-                  value={formData[field]}
-                  onChange={handleChange}
-                  className="w-full p-2 border rounded"
-                  required
-                />
-              </div>
-            ))}
+            {(["nombre", "apellidos", "email", "telefono"] as const).map(
+              (field) => (
+                <div key={field}>
+                  <label className="block mb-1 capitalize">{field}</label>
+                  <input
+                    name={field}
+                    type={
+                      field === "email"
+                        ? "email"
+                        : field === "telefono"
+                        ? "tel"
+                        : "text"
+                    }
+                    value={formData[field]}
+                    onChange={handleChange}
+                    className="w-full p-2 border rounded"
+                    required
+                  />
+                </div>
+              )
+            )}
           </div>
         </div>
       )}
 
-      {/* Paso 2: Detalles de inversión */}
+      {/* Paso 2 */}
       {activeStep === 2 && (
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">Detalles de la inversión</h3>
@@ -181,44 +201,60 @@ export default function ThreeStepForm({
         </div>
       )}
 
-      {/* Paso 3: Confirmación */}
+      {/* Paso 3: confirmación + inputs hidden */}
       {activeStep === 3 && (
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">Confirmación</h3>
           <div className="bg-gray-100 dark:bg-[#03436a] p-4 rounded-lg mb-4">
             <div className="flex justify-between py-2 border-b">
               <span>Plan</span>
-              <span>{duration} meses ({rate}%)</span>
+              <span>
+                {duration} meses ({rate}%)
+              </span>
             </div>
             <div className="flex justify-between py-2 border-b">
               <span>Monto</span>
-              <span>{formData.monto} $</span>
+              <span>{formData.monto || "N/A"} $</span>
             </div>
             <div className="flex justify-between py-2 border-b">
               <span>Fecha</span>
-              <span>{formData.fecha}</span>
+              <span>{formData.fecha || "N/A"}</span>
             </div>
             <div className="flex justify-between py-2 border-b">
               <span>Método de pago</span>
-              <span>{formData.metodo}</span>
+              <span>{formData.metodo || "N/A"}</span>
             </div>
             <div className="flex justify-between py-2">
               <span>Rentabilidad</span>
               <span>{calcularRentabilidad()}</span>
             </div>
           </div>
+
+          {/* Hidden fields para FormSubmit */}
+          {Object.entries(formData).map(([key, value]) => (
+            <input key={key} type="hidden" name={key} value={value} />
+          ))}
+
           <div className="flex items-center">
-            <input type="checkbox" id="terms" name="terms" className="mr-2" required />
+            <input
+              type="checkbox"
+              id="terms"
+              name="terms"
+              className="mr-2"
+              required
+            />
             <label htmlFor="terms" className="text-sm">
-              Acepto los <a href="#" className="text-primary">términos y condiciones</a>
+              Acepto los{" "}
+              <a href="#" className="text-primary">
+                términos y condiciones
+              </a>
             </label>
           </div>
         </div>
       )}
 
-      {/* Botones de navegación */}
+      {/* Botones */}
       <div className="flex justify-between mt-8">
-        {/* Botón Anterior */}
         <button
           type="button"
           onClick={handlePrev}
@@ -230,7 +266,6 @@ export default function ThreeStepForm({
           <ArrowLeft className="inline-block mr-1" /> Anterior
         </button>
 
-        {/* Botón Siguiente o Enviar */}
         {activeStep < 3 ? (
           <button
             type="button"

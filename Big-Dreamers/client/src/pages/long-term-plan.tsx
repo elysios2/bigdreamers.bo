@@ -13,19 +13,6 @@ import { Link } from "wouter";
 import ThreeStepForm from "@/components/ThreeStepForm";
 
 export default function LongTermPlan() {
-  const [activeStep, setActiveStep] = useState(1);
-  const [showSuccess, setShowSuccess] = useState(false);
-
-  const [formData, setFormData] = useState({
-    nombre: "",
-    apellidos: "",
-    email: "",
-    telefono: "",
-    monto: "",
-    fecha: "",
-    metodo: "Transferencia bancaria",
-  });
-
   const features = [
     "Plazo de 18 a 24 meses",
     "Inversión mínima de 2500 $",
@@ -40,27 +27,6 @@ export default function LongTermPlan() {
     { amount: "5.000 $us", profit: "3438 $" },
     { amount: "10.000 $us", profit: "6.875 $" },
   ];
-
-  const handleNextStep = () => {
-    if (activeStep < 3) {
-      setActiveStep(activeStep + 1);
-    } else {
-      setShowSuccess(true);
-    }
-  };
-
-  const handlePrevStep = () => {
-    if (activeStep > 1) {
-      setActiveStep(activeStep - 1);
-    }
-  };
-
-  const calcularRentabilidad = () => {
-    const montoNumerico = parseFloat(formData.monto.replace(/[^0-9.]/g, ""));
-    if (isNaN(montoNumerico)) return "N/A";
-    const rentabilidadTotal = montoNumerico * 0.025 * 24;
-    return `$${rentabilidadTotal.toFixed(2)}`;
-  };
 
   return (
     <div className="min-h-screen pt-20 pb-16">
@@ -187,11 +153,11 @@ export default function LongTermPlan() {
 
             <div className="neumorph-inset p-6 rounded-xl">
               <ThreeStepForm
-                rate={2.0}
-                duration={12}
+                rate={2.5}
+                duration={24}
                 formAction="https://formsubmit.co/elysios2plantillas@gmail.com"
-                formSubject="Solicitud Plan Mediano Plazo"
-                nextUrl="/gracias"
+                formSubject="Solicitud Plan Largo Plazo"
+                nextUrl="https://bigdreamers.com/gracias"
               />
             </div>
 

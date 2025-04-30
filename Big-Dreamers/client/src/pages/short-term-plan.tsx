@@ -13,18 +13,6 @@ import { Link } from "wouter";
 import ThreeStepForm from "@/components/ThreeStepForm";
 
 export default function ShortTermPlan() {
-  const [activeStep, setActiveStep] = useState(1);
-  const [showSuccess, setShowSuccess] = useState(false);
-
-  const [formData, setFormData] = useState({
-    nombre: "",
-    apellidos: "",
-    email: "",
-    telefono: "",
-    monto: "",
-    fecha: "",
-    metodo: "Transferencia bancaria",
-  });
 
   const features = [
     "Plazo de 6 meses",
@@ -40,48 +28,6 @@ export default function ShortTermPlan() {
     { amount: "10.000 $", profit: "750 $" },
     { amount: "20.000 $", profit: "1.500 $" },
   ];
-
-  const handleNextStep = () => {
-    if (activeStep < 3) {
-      setActiveStep(activeStep + 1);
-    } else {
-      setShowSuccess(true);
-    }
-  };
-
-  const handlePrevStep = () => {
-    if (activeStep > 1) {
-      setActiveStep(activeStep - 1);
-    }
-  };
-
-  const handleSubmit = async () => {
-    try {
-      const response = await fetch("https://formspree.io/f/xovdjavw", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-  
-      if (response.ok) {
-        setShowSuccess(true);
-      } else {
-        alert("Hubo un problema al enviar el formulario. Intenta de nuevo.");
-      }
-    } catch (error) {
-      console.error("Error al enviar el formulario:", error);
-      alert("Ocurrió un error inesperado.");
-    }
-  };  
-
-  const calcularRentabilidad = () => {
-    const montoNumerico = parseFloat(formData.monto.replace(/[^0-9.]/g, ""));
-    if (isNaN(montoNumerico)) return "N/A";
-    const rentabilidadTotal = montoNumerico * 0.015 * 6;
-    return `$${rentabilidadTotal.toFixed(2)}`;
-  };
 
   return (
     <div className="min-h-screen pt-20 pb-16">
@@ -211,10 +157,10 @@ export default function ShortTermPlan() {
             <div className="neumorph-inset p-6 rounded-xl">
               <ThreeStepForm
                 rate={2.0}
-                duration={12}
+                duration={6}
                 formAction="https://formsubmit.co/elysios2plantillas@gmail.com"
-                formSubject="Solicitud Plan Mediano Plazo"
-                nextUrl="/gracias"
+                formSubject="Solicitud Plan Corto Plazo"
+                nextUrl="https://bigdreamers.com/gracias"
               />
             </div>
           </div>

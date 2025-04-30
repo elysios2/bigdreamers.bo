@@ -13,19 +13,7 @@ import { Link } from "wouter";
 import ThreeStepForm from "@/components/ThreeStepForm";
 
 export default function MediumTermPlan() {
-  const [activeStep, setActiveStep] = useState(1);
-  const [showSuccess, setShowSuccess] = useState(false);
-
-  const [formData, setFormData] = useState({
-    nombre: "",
-    apellidos: "",
-    email: "",
-    telefono: "",
-    monto: "",
-    fecha: "",
-    metodo: "Transferencia bancaria",
-  });
-
+  
   const features = [
     "Plazo de 12 meses",
     "Inversión mínima de 2000 $",
@@ -40,27 +28,6 @@ export default function MediumTermPlan() {
     { amount: "10.000 $us", profit: "2400 $", rentability: "24%" },
     { amount: "20.000 $us", profit: "4800 $", rentability: "24%" },
   ];
-
-  const handleNextStep = () => {
-    if (activeStep < 3) {
-      setActiveStep(activeStep + 1);
-    } else {
-      setShowSuccess(true);
-    }
-  };
-
-  const handlePrevStep = () => {
-    if (activeStep > 1) {
-      setActiveStep(activeStep - 1);
-    }
-  };
-
-  const calcularRentabilidad = () => {
-    const montoNumerico = parseFloat(formData.monto.replace(/[^0-9.]/g, ""));
-    if (isNaN(montoNumerico)) return "N/A";
-    const rentabilidadTotal = montoNumerico * 0.02 * 12;
-    return `$${rentabilidadTotal.toFixed(2)}`;
-  };
 
   return (
     <div className="min-h-screen pt-20 pb-16">
@@ -203,7 +170,7 @@ export default function MediumTermPlan() {
                 duration={12}
                 formAction="https://formsubmit.co/elysios2plantillas@gmail.com"
                 formSubject="Solicitud Plan Mediano Plazo"
-                nextUrl="/gracias"
+                nextUrl="https://bigdreamers.com/gracias"
               />
             </div>
             
