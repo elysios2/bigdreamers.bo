@@ -155,9 +155,9 @@ export default function LongTermPlan() {
               <ThreeStepForm
                 rate={2.5}
                 duration={24}
-                formAction="https://formsubmit.co/elysios2plantillas@gmail.com"
+                formAction="https://formsubmit.co/dreamersb648@gmail.com"
                 formSubject="Solicitud Plan Largo Plazo"
-                nextUrl="https://bigdreamers.com/gracias"
+                nextUrl="https://bigdreamerss.com/gracias"
               />
             </div>
 

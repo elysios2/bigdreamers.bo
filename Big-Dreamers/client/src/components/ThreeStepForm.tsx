@@ -255,42 +255,35 @@ export default function ThreeStepForm({
 
       {/* Botones */}
       <div className="flex justify-between mt-8">
-        <button
-          type="button"
-          onClick={handlePrev}
-          disabled={activeStep === 1}
-          className={`px-4 py-2 rounded ${
-            activeStep === 1 ? "invisible" : "bg-gray-300 text-black"
-          }`}
-        >
-          <ArrowLeft className="inline-block mr-1" /> Anterior
-        </button>
-
-        {activeStep < 3 ? (
+          {/* Botón Anterior */}
           <button
             type="button"
-            onClick={handleNext}
-            className="px-6 py-2 bg-blue-600 text-white rounded flex items-center"
+            onClick={handlePrev}
+            disabled={activeStep === 1}
+            className={`text-sm px-4 py-1.5 rounded ${
+              activeStep === 1 ? "invisible" : "bg-gray-300 text-black hover:bg-gray-400 transition"
+            }`}
           >
-            Siguiente <ArrowRight className="ml-1" />
+            <ArrowLeft className="inline-block mr-1 w-4 h-4" /> Anterior
           </button>
-        ) : (
-          <div className="flex gap-4">
+
+          {/* Botón Siguiente o Enviar */}
+          {activeStep < 3 ? (
             <button
               type="button"
-              onClick={() => setActiveStep(1)}
-              className="px-6 py-2 bg-gray-400 text-white rounded hover:bg-gray-500 transition"
+              onClick={handleNext}
+              className="text-sm px-4 py-1.5 bg-blue-600 text-white rounded flex items-center hover:bg-blue-700 transition"
             >
-              Editar información
+              Siguiente <ArrowRight className="ml-1 w-4 h-4" />
             </button>
+          ) : (
             <button
               type="submit"
-              className="px-6 py-2 bg-[#048abf] text-white rounded flex items-center hover:bg-[#feba2b] transition"
+              className="text-sm px-4 py-1.5 bg-[#048abf] text-white rounded flex items-center hover:bg-[#feba2b] transition"
             >
-              <Check className="mr-2" /> Enviar
+              <Check className="mr-2 w-4 h-4" /> Enviar
             </button>
-          </div>
-        )}
+          )}
       </div>
     </form>
   );
