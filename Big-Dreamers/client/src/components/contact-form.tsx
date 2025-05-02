@@ -61,7 +61,7 @@ export default function ContactForm() {
 
           <form
             ref={formRef}
-            action="https://formsubmit.co/tu-correo@gmail.com" // <-- CAMBIA esto a tu correo real
+            action="https://formsubmit.co/dreamersb648@gmail.com" // <-- CAMBIA esto a tu correo real
             method="POST"
             className="space-y-6"
             data-aos="fade-up"
