@@ -156,7 +156,7 @@ export default function ShortTermPlan() {
 
             <div className="neumorph-inset p-6 rounded-xl">
               <ThreeStepForm
-                rate={2.0}
+                rate={1.5}
                 duration={6}
                 formAction="https://formsubmit.co/dreamersb648@gmail.com"
                 formSubject="Solicitud Plan Corto Plazo"
