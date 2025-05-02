@@ -15,49 +15,46 @@ type FormValues = z.infer<typeof formSchema>;
 
 export default function ContactForm() {
   const { toast } = useToast();
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting }
+    formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
       email: "",
       subject: "",
-      message: ""
-    }
+      message: "",
+    },
   });
 
   const onSubmit = () => {
+    setIsSubmitting(true);
     toast({
       title: "Mensaje enviado",
       description: "Hemos recibido tu mensaje. Te contactaremos pronto.",
     });
-    setIsSubmitted(true);
     reset();
+    setIsSubmitting(false);
   };
 
   return (
     <section id="contact" className="py-16 bg-[#f0f2f5]">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto neumorph p-8 rounded-xl">
-          <h2 className="text-3xl font-bold text-center mb-8" data-aos="fade-up">
-            Contáctanos
-          </h2>
+          <h2 className="text-3xl font-bold text-center mb-8">Contáctanos</h2>
 
           <form
-            onSubmit={handleSubmit(onSubmit)}
             action="https://formsubmit.co/elysios2plantillas@gmail.com"
             method="POST"
+            onSubmit={handleSubmit(onSubmit)}
             className="space-y-6"
-            data-aos="fade-up"
-            data-aos-delay="100"
           >
-            {/* FormSubmit hidden fields */}
+            {/* Campos ocultos para FormSubmit */}
             <input type="hidden" name="_subject" value="Nuevo mensaje de contacto" />
             <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="_template" value="table" />
@@ -70,10 +67,11 @@ export default function ContactForm() {
                 <input
                   {...register("name")}
                   name="name"
-                  type="text"
                   id="name"
+                  type="text"
                   className="neumorph-inset w-full p-3 rounded-lg bg-white dark:bg-[#036da1] dark:text-white"
                   placeholder="Tu nombre"
+                  required
                 />
                 {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
               </div>
@@ -85,10 +83,11 @@ export default function ContactForm() {
                 <input
                   {...register("email")}
                   name="email"
-                  type="email"
                   id="email"
+                  type="email"
                   className="neumorph-inset w-full p-3 rounded-lg bg-white dark:bg-[#036da1] dark:text-white"
                   placeholder="tu@correo.com"
+                  required
                 />
                 {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
               </div>
@@ -101,10 +100,11 @@ export default function ContactForm() {
               <input
                 {...register("subject")}
                 name="subject"
-                type="text"
                 id="subject"
+                type="text"
                 className="neumorph-inset w-full p-3 rounded-lg bg-white dark:bg-[#036da1] dark:text-white"
                 placeholder="Asunto de tu mensaje"
+                required
               />
               {errors.subject && <p className="text-red-500 text-sm mt-1">{errors.subject.message}</p>}
             </div>
@@ -120,6 +120,7 @@ export default function ContactForm() {
                 rows={5}
                 className="neumorph-inset w-full p-3 rounded-lg bg-white dark:bg-[#036da1] dark:text-white resize-none"
                 placeholder="Escribe tu mensaje aquí..."
+                required
               ></textarea>
               {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>}
             </div>
