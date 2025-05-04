@@ -75,14 +75,10 @@ export default function ThreeStepForm({
       method="POST"
       className="neumorph p-6 md:p-8 rounded-xl"
     >
-      {/* FormSubmit hidden fields */}
       <input type="hidden" name="_subject" value={formSubject} />
       <input type="hidden" name="_captcha" value="false" />
-      {nextUrl && (
-        <input type="hidden" name="_next" value={nextUrl} />
-      )}
+      {nextUrl && <input type="hidden" name="_next" value={nextUrl} />}
 
-      {/* Step indicators */}
       <div className="flex justify-between mb-6">
         {[1, 2, 3].map((step) => (
           <div key={step} className="relative w-1/3">
@@ -102,17 +98,12 @@ export default function ThreeStepForm({
                   : "text-gray-500 dark:text-gray-400"
               }`}
             >
-              {step === 1
-                ? "Información"
-                : step === 2
-                ? "Monto"
-                : "Confirmación"}
+              {step === 1 ? "Información" : step === 2 ? "Monto" : "Confirmación"}
             </p>
           </div>
         ))}
       </div>
 
-      {/* Paso 1 */}
       {activeStep === 1 && (
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">Información personal</h3>
@@ -132,7 +123,7 @@ export default function ThreeStepForm({
                     }
                     value={formData[field]}
                     onChange={handleChange}
-                    className="w-full p-2 border rounded"
+                    className="w-full p-2 border rounded text-black"
                     required
                   />
                 </div>
@@ -142,7 +133,6 @@ export default function ThreeStepForm({
         </div>
       )}
 
-      {/* Paso 2 */}
       {activeStep === 2 && (
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">Detalles de la inversión</h3>
@@ -158,7 +148,7 @@ export default function ThreeStepForm({
                 value={formData.monto}
                 onChange={handleChange}
                 placeholder={`Mínimo ${duration === 12 ? 2000 : 2500}$`}
-                className="w-full p-2 pl-10 border rounded"
+                className="w-full p-2 pl-10 border rounded text-black"
                 required
               />
             </div>
@@ -174,7 +164,7 @@ export default function ThreeStepForm({
                 type="date"
                 value={formData.fecha}
                 onChange={handleChange}
-                className="w-full p-2 pl-10 border rounded"
+                className="w-full p-2 pl-10 border rounded text-black"
                 required
               />
             </div>
@@ -189,7 +179,7 @@ export default function ThreeStepForm({
                 name="metodo"
                 value={formData.metodo}
                 onChange={handleChange}
-                className="w-full p-2 pl-10 border rounded"
+                className="w-full p-2 pl-10 border rounded text-black"
                 required
               >
                 <option>Transferencia bancaria</option>
@@ -201,7 +191,6 @@ export default function ThreeStepForm({
         </div>
       )}
 
-      {/* Paso 3: confirmación + inputs hidden */}
       {activeStep === 3 && (
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">Confirmación</h3>
@@ -230,7 +219,6 @@ export default function ThreeStepForm({
             </div>
           </div>
 
-          {/* Hidden fields para FormSubmit */}
           {Object.entries(formData).map(([key, value]) => (
             <input key={key} type="hidden" name={key} value={value} />
           ))}
@@ -253,37 +241,36 @@ export default function ThreeStepForm({
         </div>
       )}
 
-      {/* Botones */}
       <div className="flex justify-between mt-8">
-          {/* Botón Anterior */}
+        <button
+          type="button"
+          onClick={handlePrev}
+          disabled={activeStep === 1}
+          className={`text-sm px-4 py-1.5 rounded ${
+            activeStep === 1
+              ? "invisible"
+              : "bg-gray-300 text-black hover:bg-gray-400 transition"
+          }`}
+        >
+          <ArrowLeft className="inline-block mr-1 w-4 h-4" /> Anterior
+        </button>
+
+        {activeStep < 3 ? (
           <button
             type="button"
-            onClick={handlePrev}
-            disabled={activeStep === 1}
-            className={`text-sm px-4 py-1.5 rounded ${
-              activeStep === 1 ? "invisible" : "bg-gray-300 text-black hover:bg-gray-400 transition"
-            }`}
+            onClick={handleNext}
+            className="text-sm px-4 py-1.5 bg-blue-600 text-white rounded flex items-center hover:bg-blue-700 transition"
           >
-            <ArrowLeft className="inline-block mr-1 w-4 h-4" /> Anterior
+            Siguiente <ArrowRight className="ml-1 w-4 h-4" />
           </button>
-
-          {/* Botón Siguiente o Enviar */}
-          {activeStep < 3 ? (
-            <button
-              type="button"
-              onClick={handleNext}
-              className="text-sm px-4 py-1.5 bg-blue-600 text-white rounded flex items-center hover:bg-blue-700 transition"
-            >
-              Siguiente <ArrowRight className="ml-1 w-4 h-4" />
-            </button>
-          ) : (
-            <button
-              type="submit"
-              className="text-sm px-4 py-1.5 bg-[#048abf] text-white rounded flex items-center hover:bg-[#feba2b] transition"
-            >
-              <Check className="mr-2 w-4 h-4" /> Enviar
-            </button>
-          )}
+        ) : (
+          <button
+            type="submit"
+            className="text-sm px-4 py-1.5 bg-[#048abf] text-white rounded flex items-center hover:bg-[#feba2b] transition"
+          >
+            <Check className="mr-2 w-4 h-4" /> Enviar
+          </button>
+        )}
       </div>
     </form>
   );
