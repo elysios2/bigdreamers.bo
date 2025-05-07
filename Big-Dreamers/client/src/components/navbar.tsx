@@ -57,23 +57,18 @@ export default function Navbar() {
             <ul className="hidden md:flex space-x-6 justify-end">
               <li>
                 <a
+                  href="/blog"
+                  className="text-[#feba2b] font-semibold hover:text-[#048abf] dark:text-white dark:hover:text-[#feba2b] transition-colors"
+                >
+                  Blog
+                </a>
+              </li>
+              <li>
+                <a
                   href="#contact"
                   className="text-gray-800 dark:text-white hover:text-[#048abf] dark:hover:text-[#feba2b] transition-colors"
                 >
                   Contáctanos
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="flex-1 md:flex-none md:w-1/3">
-            <ul className="hidden md:flex space-x-6 justify-end">
-              <li>
-                <a
-                  href="/blog"
-                  className="text-gray-800 dark:text-white hover:text-[#048abf] dark:hover:text-[#feba2b] transition-colors"
-                >
-                  Blog
                 </a>
               </li>
             </ul>
@@ -102,6 +97,15 @@ export default function Navbar() {
               onClick={() => setIsMenuOpen(false)}
             >
               Inversión
+            </a>
+          </li>
+          <li>
+            <a
+              href="/blog"
+              className="block text-[#feba2b] font-semibold hover:text-[#048abf] dark:text-white dark:hover:text-[#feba2b] transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Blog
             </a>
           </li>
           <li>
