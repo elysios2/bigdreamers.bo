@@ -65,6 +65,19 @@ export default function Navbar() {
               </li>
             </ul>
           </div>
+
+          <div className="flex-1 md:flex-none md:w-1/3">
+            <ul className="hidden md:flex space-x-6 justify-end">
+              <li>
+                <a
+                  href="/blog"
+                  className="text-gray-800 dark:text-white hover:text-[#048abf] dark:hover:text-[#feba2b] transition-colors"
+                >
+                  Blog
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
