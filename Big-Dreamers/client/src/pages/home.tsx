@@ -6,6 +6,7 @@ import InvestmentPlans from "@/components/investment-plans";
 import VideoSection from "@/components/video-section";
 import ContactForm from "@/components/contact-form";
 import TeamSection from "@/components/team-section";
+import InterestSection from "@/components/interest-section";
 import Footer from "@/components/footer";
 import Modals from "@/components/modals";
 import ThemeToggle from "@/components/theme-toggle";
@@ -34,6 +35,7 @@ export default function Home() {
       
       <main className="pt-20">
         <HeroSection />
+        <InterestSection />
         <InvestmentPlans />
         <VideoSection />
         <ContactForm />
