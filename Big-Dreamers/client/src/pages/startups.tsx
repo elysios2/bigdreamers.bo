@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 import {
   ArrowLeft,
   Rocket,
@@ -39,7 +39,7 @@ export default function Startups() {
         <section className="py-12 md:py-20 bg-white dark:bg-[#048abf]">
           <div className="container mx-auto px-4">
             <Link
-              href="/"
+              to="/"
               className="inline-flex items-center text-[#048abf] dark:text-white hover:text-[#036d9f] dark:hover:text-[#feba2b] transition-colors mb-6"
             >
               <ArrowLeft className="h-4 w-4 mr-2" />

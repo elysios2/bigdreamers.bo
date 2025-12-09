@@ -1,5 +1,5 @@
 import { CreditCard, Clock, TrendingUp } from "lucide-react";
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 import { useModal } from "@/hooks/use-modal";
 
 export default function InterestSection() {
@@ -118,7 +118,7 @@ export default function InterestSection() {
                                 </div>
 
                                 <div className="flex space-x-3 mt-auto">
-                                    <Link href={plan.route} className="flex-1">
+                                    <Link to={plan.route} className="flex-1">
                                         <button
                                             className="w-full py-2 rounded-md font-medium text-white transition-all hover:opacity-90"
                                             style={{ background: `linear-gradient(90deg, ${plan.color} 0%, ${plan.color}99 100%)` }}

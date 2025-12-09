@@ -1,15 +1,11 @@
-import { useState } from "react";
 import {
   ArrowLeft,
   Check,
   Percent,
-  Calendar,
-  DollarSign,
-  Wallet,
   ArrowRight,
   BarChart,
 } from "lucide-react";
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 import ThreeStepForm from "@/components/ThreeStepForm";
 
 export default function ShortTermPlan() {
@@ -33,7 +29,7 @@ export default function ShortTermPlan() {
     <div className="min-h-screen pt-20 pb-16">
       <div className="container mx-auto px-4">
         <Link
-          href="/"
+          to="/"
           className="inline-flex items-center text-primary hover:text-[#ff0066] dark:text-white dark:hover:text-[#feba2b] mb-6"
         >
           <ArrowLeft className="h-4 w-4 mr-2" />
@@ -71,12 +67,6 @@ export default function ShortTermPlan() {
                 <div className="my-2" />
                 <p className="text-gray-700 dark:text-gray-300 mb-2">
                   Rentabilidad Rapida y sin condicionantes
-                </p>
-                <p
-                  className="text-lg font-semibold dark:text-white"
-                  style={{ color: "#048abf" }}
-                >
-                  {example.rentability}
                 </p>
                 <div className="my-2" />
               </div>
@@ -145,7 +135,7 @@ export default function ShortTermPlan() {
                   </div>
                 </div>
                 <Link
-                  href="/casos-de-exito"
+                  to="/casos-de-exito"
                   className="mt-4 md:mt-0 inline-flex items-center bg-white text-[#feba2b] dark:text-white px-5 py-2 rounded-lg font-medium hover:bg-opacity-90 transition"
                   >
                     Ver

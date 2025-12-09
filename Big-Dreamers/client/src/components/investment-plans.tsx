@@ -1,5 +1,5 @@
 import { CreditCard, Clock, TrendingUp } from "lucide-react";
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 import { useModal } from "@/hooks/use-modal";
 
 export default function InvestmentPlans() {
@@ -119,7 +119,7 @@ export default function InvestmentPlans() {
                 </div>
                 
                 <div className="flex space-x-3">
-                  <Link href={plan.route} className="flex-1">
+                  <Link to={plan.route} className="flex-1">
                     <button 
                       className="w-full py-2 rounded-md text-white font-medium transition-colors hover:opacity-90"
                       style={{ backgroundColor: plan.color }}
