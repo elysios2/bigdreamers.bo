@@ -16,6 +16,7 @@ import Gracias from "@/pages/Gracias";
 import InterestSimple from "@/pages/interest-simple";
 import InterestCompound from "@/pages/interest-compound";
 import InteresttMixed from "@/pages/interest-mixed";
+import AdviceMentoring from "@/pages/advice-mentoring";
 
 function Router() {
   return (
@@ -28,7 +29,7 @@ function Router() {
       <Route path="/interes/compuesto" component={InterestCompound} />
       <Route path="/interes/mixto" component={InteresttMixed} />
       <Route path="/casos-de-exito" component={SuccessStories} />
-      <Route path="" component={InterestSimple} />
+      <Route path="/asesoria-mentoria" component={AdviceMentoring} />
       <Route path="/about-us" component={AboutUs} />
       <Route path="/blog" component={Blog} />
       <Route path="/investor-guide" component={InvestorGuide} />
