@@ -1,4 +1,4 @@
-import { Switch, Route } from "wouter";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -20,23 +20,25 @@ import AdviceMentoring from "@/pages/advice-mentoring";
 
 function Router() {
   return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/plan/corto-plazo" component={ShortTermPlan} />
-      <Route path="/plan/mediano-plazo" component={MediumTermPlan} />
-      <Route path="/plan/largo-plazo" component={LongTermPlan} />
-      <Route path="/interes/simple" component={InterestSimple} />
-      <Route path="/interes/compuesto" component={InterestCompound} />
-      <Route path="/interes/mixto" component={InteresttMixed} />
-      <Route path="/casos-de-exito" component={SuccessStories} />
-      <Route path="/asesoria-mentoria" component={AdviceMentoring} />
-      <Route path="/about-us" component={AboutUs} />
-      <Route path="/blog" component={Blog} />
-      <Route path="/investor-guide" component={InvestorGuide} />
-      <Route path="/startups" component={Startups} />
-      <Route path="/gracias" component={Gracias} />
-      <Route component={NotFound} />
-    </Switch>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/plan/corto-plazo" element={<ShortTermPlan />} />
+        <Route path="/plan/mediano-plazo" element={<MediumTermPlan />} />
+        <Route path="/plan/largo-plazo" element={<LongTermPlan />} />
+        <Route path="/interes/simple" element={<InterestSimple />} />
+        <Route path="/interes/compuesto" element={<InterestCompound />} />
+        <Route path="/interes/mixto" element={<InteresttMixed />} />
+        <Route path="/casos-de-exito" element={<SuccessStories />} />
+        <Route path="/asesoria-mentoria" element={<AdviceMentoring />} />
+        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/investor-guide" element={<InvestorGuide />} />
+        <Route path="/startups" element={<Startups />} />
+        <Route path="/gracias" element={<Gracias />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
