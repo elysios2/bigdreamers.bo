@@ -1,262 +1,313 @@
-import { Users, ArrowRight, ChevronDown, Target, TrendingUp } from "lucide-react";
 import { useState } from "react";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
-import ThemeToggle from "@/components/theme-toggle";
+import { Users, ArrowRight, ChevronDown, Target, TrendingUp } from "lucide-react";
 import Chatbot from "@/components/chatbot";
-import ThreeStepForm from '../components/ThreeStepForm';
+import ThemeToggle from "@/components/theme-toggle";
+import Footer from "@/components/footer";
+import Navbar from "@/components/navbar";
 
 export default function AdviceMentoring() {
     const [openFaq, setOpenFaq] = useState<string | null>(null);
 
     const benefits = [
         {
-            title: "Guía Experta",
-            description: "Mentoría de fundadores con el consejo de expertos en la industria.",
+            title: "Para Todos los Rubros",
+            description: "Carpintería, tecnología, gastronomía, belleza, servicios, comercio o cualquier área. Tu rubro no es límite.",
             icon: <Users className="h-6 w-6" />,
         },
         {
-            title: "Crecimiento Estratégico",
-            description: "Diseñamos e implementamos planes para acelerar tu crecimiento empresarial.",
+            title: "Desde Cero o en Crecimiento",
+            description: "Desde tu primera idea hasta expandir tu negocio establecido. Te acompañamos en cada etapa de tu emprendimiento.",
             icon: <TrendingUp className="h-6 w-6" />,
         },
         {
-            title: "Red Vasta",
-            description: "Accede a una red establecida de la industria e inversores.",
+            title: "Mentoría Adaptada a Ti",
+            description: "Guía personalizada según las necesidades específicas de tu negocio, experiencia y recursos disponibles.",
             icon: <Target className="h-6 w-6" />,
+        },
+    ] as const;
+
+    const industries = [
+        {
+            title: "Oficios y Artesanías",
+            examples: "Carpinteros, herreros, costureras, artesanos",
+            image: "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=800&q=80",
+        },
+        {
+            title: "Gastronomía y Servicios",
+            examples: "Restaurantes, panaderías, catering, salones",
+            image: "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=800&q=80",
+        },
+        {
+            title: "Tecnología y Digital",
+            examples: "Desarrolladores, diseñadores, agencias, e-commerce",
+            image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80",
+        },
+        {
+            title: "Belleza y Bienestar",
+            examples: "Peluquerías, spas, entrenadores, terapeutas",
+            image: "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&q=80",
         },
     ] as const;
 
     const services = [
         {
-            title: "Asesoría Financiera",
+            title: "Asesoría Financiera para Cualquier Negocio",
             description:
-                "Te acompañamos desde la evaluación TOTAL, desde la incubación de fondos a tu modelo de financiero hasta la gestión del flujo de caja y la garantía de rentabilidad y crecimiento.",
+                "Ya sea que vendas muebles hechos a mano, prepares comida casera o desarrolles aplicaciones móviles, te ayudamos con tu modelo financiero, flujo de caja, control de gastos y gestión de recursos desde el primer día. Sin importar tu nivel de experiencia en finanzas.",
         },
         {
-            title: "Estrategias de Marketing y Ventas",
+            title: "Marketing y Ventas Adaptado a tu Rubro",
             description:
-                "Desarrollamos estrategias personalizadas para aumentar tu visibilidad, atraer clientes y optimizar tus conversiones de ventas.",
+                "Estrategias personalizadas para tu industria: desde presencia en redes sociales para artesanos y comerciantes locales, hasta campañas digitales para servicios profesionales. Te enseñamos a atraer clientes, aumentar tu visibilidad y cerrar más ventas.",
         },
         {
-            title: "Eficiencia Operativa",
+            title: "Operaciones y Productividad",
             description:
-                "Optimizamos tus procesos internos, implementamos tecnología adecuada y mejoramos la productividad de tu equipo.",
+                "Optimiza tus procesos de trabajo, mejora tu eficiencia y organiza tu negocio de manera profesional. Desde talleres físicos hasta negocios digitales, te ayudamos a trabajar de forma más inteligente y rentable.",
         },
         {
-            title: "Tecnología y Desarrollo de Producto",
+            title: "Formalización y Crecimiento",
             description:
-                "Te asesoramos en la selección de tecnologías, desarrollo de producto y escalabilidad técnica de tu startup.",
+                "Te acompañamos en la formalización legal de tu negocio, desarrollo de producto o servicio, escalamiento según tus posibilidades y objetivos, y acceso a nuevos mercados y oportunidades de expansión.",
         },
     ] as const;
 
     const faqs = [
         {
-            question: "¿Qué tipo de personas o empresas pueden invertir en BigDreamers?",
+            question: "¿Realmente puedo acceder a asesoría sin importar mi rubro o experiencia?",
             answer:
-                "Cualquier persona mayor de edad con capacidad legal para invertir puede participar. También aceptamos startups y emprendedores que busquen inversión y mentoría estratégica para hacer crecer su negocio.",
+                "¡Absolutamente! En BigDreamers trabajamos con emprendedores de todos los rubros: desde carpinteros, chefs y costureras hasta desarrolladores y profesionales de servicios. No importa si recién estás empezando o si ya tienes experiencia. Adaptamos nuestra mentoría a tu situación específica.",
         },
         {
-            question: "¿Cuál es la inversión mínima requerida?",
+            question: "No tengo experiencia en negocios, ¿pueden ayudarme igual?",
             answer:
-                "La inversión mínima es de 7.000 Bs. Esto aplica para todos los tipos de interés: simple, compuesto o mixto. Nuestro objetivo es hacer que la inversión sea accesible, segura y transparente.",
+                "Sí, esa es nuestra especialidad. Muchos de nuestros emprendedores exitosos comenzaron sin conocimientos en finanzas, marketing o administración. Te enseñamos desde lo más básico hasta estrategias avanzadas, adaptándonos a tu ritmo de aprendizaje.",
         },
         {
-            question: "¿Qué tipo de retorno puedo esperar y cómo se calcula?",
+            question: "¿Cuál es la inversión mínima para acceder a asesoría?",
             answer:
-                "Ofrecemos tres modalidades: \n\n- Interés Simple: rentabilidad fija mensual según la duración del contrato.\n- Interés Compuesto: crecimiento progresivo del capital, con reinversión automática de los intereses.\n- Interés Mixto: combina liquidez del simple y crecimiento del compuesto, ideal para quienes buscan equilibrio entre rendimiento y disponibilidad.\n\nTodos los cálculos son claros y explicados antes de la inversión.",
+                "La inversión mínima es de 7.000 Bs. Este monto te da acceso a capital para tu negocio y al programa completo de mentoría personalizada. Es una inversión en tu futuro y el crecimiento de tu emprendimiento.",
         },
         {
-            question: "¿Cuál es la duración de los contratos?",
+            question: "¿Qué incluye el programa de mentoría?",
             answer:
-                "Los contratos tienen una duración flexible de 6 a 24 meses, según tus objetivos y necesidades. Al finalizar, puedes optar por retirar tu capital o renovarlo para seguir obteniendo ganancias.",
+                "Incluye sesiones personalizadas con expertos en tu área, asesoría financiera práctica, estrategias de marketing adaptadas a tu rubro, optimización de procesos, apoyo en formalización legal, acceso a nuestra red de contactos y seguimiento continuo de tu progreso.",
         },
         {
-            question: "¿Qué pasa si necesito retirar mi dinero antes de la finalización del contrato?",
+            question: "¿Cuánto tiempo dura el acompañamiento?",
             answer:
-                "Dependiendo del tipo de interés elegido, algunas modalidades permiten retiros anticipados parciales. Siempre tendrás claridad sobre cómo afectará esto tu rentabilidad, y nuestro equipo te asesora para tomar la mejor decisión.",
+                "El programa de mentoría se ajusta a la duración de tu contrato de inversión (6 a 24 meses). Durante todo ese tiempo tendrás acceso a sesiones de asesoría, recursos y el apoyo de nuestro equipo para asegurar el éxito de tu negocio.",
         },
         {
-            question: "¿Mi inversión está segura?",
+            question: "¿Necesito tener un negocio ya establecido?",
             answer:
-                "Sí, todas las inversiones están respaldadas por contratos claros y transparentes. Además, BigDreamers ofrece seguimiento constante, asesoramiento financiero y control total sobre tu inversión para que siempre sepas cómo se está manejando tu capital.",
+                "No necesariamente. Trabajamos tanto con emprendedores que recién tienen una idea como con negocios que ya están operando y quieren crecer. Te ayudamos desde la conceptualización hasta la expansión, según tu etapa actual.",
         },
         {
-            question: "¿Cómo se realiza el seguimiento de mi inversión?",
+            question: "¿Qué diferencia a BigDreamers de otros programas de asesoría?",
             answer:
-                "Contamos con un sistema de seguimiento personalizado. Recibirás reportes periódicos sobre el rendimiento, el estado de tu inversión y recomendaciones financieras de nuestros expertos.",
+                "Combinamos capital con mentoría práctica y personalizada. No solo te damos recursos financieros, sino que te acompañamos paso a paso en el crecimiento de tu negocio. Además, somos inclusivos: no discriminamos por rubro, tamaño o experiencia previa.",
         },
         {
-            question: "¿Qué pasa al finalizar el contrato?",
+            question: "¿Cómo se adapta la asesoría a mi tipo de negocio específico?",
             answer:
-                "Al finalizar el contrato, recibirás la devolución completa de tu capital junto con los intereses generados según la modalidad seleccionada. También tienes la opción de reinvertir o suscribirte a un nuevo ciclo.",
+                "Cada rubro tiene sus particularidades. Nuestro equipo cuenta con experiencia en múltiples industrias y adaptamos las estrategias a tu realidad: costos de materiales para artesanos, rotación de inventario para comerciantes, adquisición digital para servicios, etc.",
         },
         {
-            question: "¿Qué incluye el acompañamiento de mentoría?",
+            question: "¿Puedo empezar aunque mi negocio sea muy pequeño?",
             answer:
-                "Si eres emprendedor, el programa de mentoría incluye sesiones uno a uno con expertos, acceso a nuestra red de mentores, talleres especializados y apoyo estratégico en finanzas, marketing, operaciones y tecnología.",
+                "¡Por supuesto! De hecho, muchos emprendimientos exitosos comenzaron muy pequeños. Lo importante es tu compromiso, tu visión y tus ganas de crecer. Nosotros te damos las herramientas y el conocimiento para escalar a tu propio ritmo.",
         },
         {
-            question: "¿Cómo puedo suscribirme o iniciar mi inversión?",
+            question: "¿Cómo inicio el proceso con BigDreamers?",
             answer:
-                "Puedes suscribirte directamente desde nuestro sitio web o contactando a nuestro equipo. Te guiaremos paso a paso, desde la elección de la modalidad de interés hasta la firma del contrato y seguimiento de tu inversión.",
-        },
-        {
-            question: "¿BigDreamers ofrece garantías o respaldo institucional?",
-            answer:
-                "Sí, nuestras inversiones están respaldadas por la transparencia de nuestros contratos, el seguimiento constante del equipo y nuestra red de socios e inversores. Siempre tendrás visibilidad completa sobre tu capital y rendimientos.",
+                "Es muy simple: completa el formulario de contacto en esta página o comunícate directamente con nuestro equipo. Agendaremos una reunión inicial sin compromiso para conocer tu proyecto, explicarte cómo funciona el programa y diseñar un plan personalizado para ti.",
         },
     ] as const;
 
-
     return (
-        <>
+        <div className="min-h-screen bg-white text-slate-900 dark:text-white">
             <Navbar />
-            <div className="bg-slate-900 text-white">
-                {/* Hero Section */}
-                <section className="relative py-40 px-4">
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-purple-600/20"></div>
-                    <div className="container mx-auto max-w-6xl relative z-10">
-                        <div className="max-w-3xl">
-                            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-                                Desbloquea tu Potencial. Crece con Mentoría Experta.
-                            </h1>
-                            <p className="text-xl text-slate-300 mb-8">
-                                Obtén el capital y el acompañamiento estratégico que tu startup necesita para alcanzar el siguiente nivel.
-                            </p>
-                            <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-lg transition-colors inline-flex items-center gap-2">
-                                Agendar una Consulta
-                                <ArrowRight className="h-5 w-5" />
-                            </button>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Benefits Section */}
-                <section className="py-20 px-4 bg-slate-800/50">
-                    <div className="container mx-auto max-w-6xl">
-                        <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                            ¿Por qué asociarse con BigDreamers?
-                        </h2>
-                        <p className="text-slate-400 mb-12 max-w-3xl">
-                            Obtén una ventaja competitiva con la guía personalizada de expertos experimentados que han
-                            estado en tu lugar. Proporcionamos las herramientas, la red y las competencias estratégicas para
-                            convertir tu visión en una realidad.
+            {/* Hero Section */}
+            <section className="relative pt-40 pb-24 px-4 overflow-hidden">
+                <div className="absolute inset-0 dark:bg-gradient-to-br dark:from-blue-600/20 dark:via-purple-600/20 dark:to-blue-800/20"></div>
+                <div className="container mx-auto max-w-6xl relative z-10">
+                    <div className="max-w-4xl mx-auto text-center">
+                        <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                            Tu Sueño, Sin Límites
+                        </h1>
+                        <p className="text-xl text-slate-600 dark:text-slate-300 mb-8 max-w-3xl mx-auto">
+                            Desde tu primera venta hasta tu expansión nacional. <br />
+                            En BigDreamers hacemos posible tu emprendimiento con capital y mentoría experta.
                         </p>
-
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            {benefits.map((benefit, index) => (
-                                <div key={index} className="flex gap-4">
-                                    <div className="flex-shrink-0">
-                                        <div className="w-12 h-12 bg-blue-600/20 rounded-lg flex items-center justify-center text-blue-400">
-                                            {benefit.icon}
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h3 className="text-xl font-bold mb-2">{benefit.title}</h3>
-                                        <p className="text-slate-400">{benefit.description}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                        <a href="#contact"
+                            className="bg-yellow-500 hover:bg-yellow-400 text-white font-semibold px-8 py-4 rounded-lg transition-colors inline-flex items-center gap-2 text-lg">
+                            Agenda tu Consulta Gratuita
+                            <ArrowRight className="h-5 w-5" />
+                        </a>
                     </div>
-                </section>
+                </div>
+            </section>
 
-                {/* Services Section */}
-                <section className="py-20 px-4">
-                    <div className="container mx-auto max-w-6xl">
-                        <h2 className="text-3xl md:text-4xl font-bold mb-12">
-                            Servicios de Asesoría a tu Medida
-                        </h2>
+            {/* Industries Section */}
+            <section className="py-16 px-4 bg-slate-100 dark:bg-slate-800/30">
+                <div className="container mx-auto max-w-6xl">
+                    <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
+                        Emprendedores de Todos los Rubros Confían en Nosotros
+                    </h2>
+                    <p className="text-slate-600 dark:text-slate-400 mb-12 text-center max-w-3xl mx-auto">
+                        No importa a qué te dediques. Si tienes un sueño y ganas de trabajar, nosotros te damos las herramientas.
+                    </p>
 
-                        <div className="space-y-4">
-                            {services.map((service, index) => (
-                                <div
-                                    key={index}
-                                    className="bg-slate-800/50 border border-slate-700 rounded-lg overflow-hidden hover:border-slate-600 transition-colors"
-                                >
-                                    <button
-                                        onClick={() => setOpenFaq(openFaq && Number(openFaq) === index ? null : `${index}`)}
-                                        className="w-full px-6 py-5 flex items-center justify-between text-left"
-                                    >
-                                        <span className="text-lg font-semibold">{service.title}</span>
-                                        <ChevronDown
-                                            className={`h-5 w-5 transition-transform ${openFaq && Number(openFaq)=== index ? "rotate-180" : ""
-                                                }`}
-                                        />
-                                    </button>
-                                    {openFaq && Number(openFaq) === index && (
-                                        <div className="px-6 pb-5 text-slate-400">
-                                            {service.description}
-                                        </div>
-                                    )}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
-                {/* FAQ Section */}
-                <section className="py-20 px-4 bg-slate-800/50">
-                    <div className="container mx-auto max-w-6xl">
-                        <h2 className="text-3xl md:text-4xl font-bold mb-12">
-                            Preguntas Frecuentes
-                        </h2>
-
-                        <div className="space-y-4">
-                            {faqs.map((faq, index) => (
-                                <div
-                                    key={index}
-                                    className="bg-slate-800/50 border border-slate-700 rounded-lg overflow-hidden hover:border-slate-600 transition-colors"
-                                >
-                                    <button
-                                        onClick={() => setOpenFaq(`faq-${index}` === openFaq ? null : `faq-${index}`)}
-                                        className="w-full px-6 py-5 flex items-center justify-between text-left"
-                                    >
-                                        <span className="text-lg font-semibold">{faq.question}</span>
-                                        <ChevronDown
-                                            className={`h-5 w-5 transition-transform flex-shrink-0 ml-4 ${openFaq === `faq-${index}` ? "rotate-180" : ""
-                                                }`}
-                                        />
-                                    </button>
-                                    {openFaq === `faq-${index}` && (
-                                        <div className="px-6 pb-5 text-slate-400">
-                                            {faq.answer}
-                                        </div>
-                                    )}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
-                {/* CTA Section */}
-                <section className="py-20 px-4">
-                    <div className="container mx-auto max-w-6xl">
-                        <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-12 text-center">
-                            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                                Comienza tu Viaje Hoy
-                            </h2>
-                            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-                                ¿Listo para llevar tu negocio al siguiente nivel? Conéctate con nuestro equipo y
-                                descubre cómo podemos ayudarte a alcanzar tus objetivos empresariales.
-                            </p>
-                            <div className="neumorph-inset p-6 rounded-xl">
-                                <ThreeStepForm
-                                    rate={2.5}
-                                    duration={24}
-                                    formAction="https://formsubmit.co/dreamersb648@gmail.com"
-                                    formSubject={`Hola, me llamo${name}, me gustaría solicitar un plan de asesoría personalizada para mi empresa`}
-                                    nextUrl="https://bigdreamerss.com/gracias"
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {industries.map((industry, index) => (
+                            <div
+                                key={index}
+                                className="relative h-64 rounded-xl overflow-hidden group border-2 border-transparent hover:border-blue-500 transition-all"
+                            >
+                                <img
+                                    src={industry.image}
+                                    alt={industry.title}
+                                    className="absolute inset-0 w-full h-full object-cover"
                                 />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent group-hover:from-black/90 transition-all"></div>
+                                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                                    <h3 className="text-xl font-bold mb-2">{industry.title}</h3>
+                                    <p className="text-slate-200 text-sm">{industry.examples}</p>
+                                </div>
                             </div>
-                        </div>
+                        ))}
                     </div>
-                </section>
-            </div>
-            <Footer />
-            <ThemeToggle />
+                </div>
+            </section>
+
+            {/* Benefits Section */}
+            <section className="py-20 px-4">
+                <div className="container mx-auto max-w-6xl">
+                    <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                        ¿Por qué elegir BigDreamers?
+                    </h2>
+                    <p className="text-slate-600 dark:text-slate-200 mb-12 max-w-3xl">
+                        No importa si eres carpintero, chef, diseñador, técnico, comerciante o fundador de una startup.
+                        En BigDreamers creemos que cada sueño merece una oportunidad real. Te damos el capital, la mentoría
+                        y las herramientas para hacer realidad tu proyecto, sin importar tu experiencia o rubro.
+                    </p>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {benefits.map((benefit, index) => (
+                            <div key={index} className="flex gap-4">
+                                <div className="flex-shrink-0">
+                                    <div className="w-12 h-12 bg-blue-600/20 rounded-lg flex items-center justify-center text-blue-400 dark:text-blue-200">
+                                        {benefit.icon}
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-bold mb-2">{benefit.title}</h3>
+                                    <p className="text-slate-600 dark:text-slate-200">{benefit.description}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Services Section */}
+            <section className="py-20 px-4 bg-slate-100 dark:bg-slate-800/30">
+                <div className="container mx-auto max-w-6xl">
+                    <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                        Servicios de Asesoría Adaptados a Tu Realidad
+                    </h2>
+                    <p className="text-slate-600 dark:text-slate-200 mb-12 max-w-3xl">
+                        Cada negocio es diferente. Por eso, nuestra mentoría se ajusta a lo que realmente necesitas,
+                        en un lenguaje claro y con soluciones prácticas.
+                    </p>
+
+                    <div className="space-y-4">
+                        {services.map((service, index) => (
+                            <div
+                                key={index}
+                                className="bg-white dark:bg-slate-800/50 border border-slate-300 dark:border-slate-700 rounded-lg overflow-hidden hover:border-slate-400 dark:hover:border-slate-600 transition-colors"
+                            >
+                                <button
+                                    onClick={() => setOpenFaq(openFaq && Number(openFaq) === index ? null : `${index}`)}
+                                    className="w-full px-6 py-5 flex items-center justify-between text-left"
+                                >
+                                    <span className="text-lg font-semibold">{service.title}</span>
+                                    <ChevronDown
+                                        className={`h-5 w-5 transition-transform ${openFaq && Number(openFaq) === index ? "rotate-180" : ""
+                                            }`}
+                                    />
+                                </button>
+                                {openFaq && Number(openFaq) === index && (
+                                    <div className="px-6 pb-5 text-slate-600 dark:text-slate-200">
+                                        {service.description}
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* FAQ Section */}
+            <section className="py-20 px-4">
+                <div className="container mx-auto max-w-6xl">
+                    <h2 className="text-3xl md:text-4xl font-bold mb-12">
+                        Preguntas Frecuentes
+                    </h2>
+
+                    <div className="space-y-4">
+                        {faqs.map((faq, index) => (
+                            <div
+                                key={index}
+                                className="bg-white dark:bg-slate-800/50 border border-slate-300 dark:border-slate-700 rounded-lg overflow-hidden hover:border-slate-400 dark:hover:border-slate-600 transition-colors"
+                            >
+                                <button
+                                    onClick={() => setOpenFaq(`faq-${index}` === openFaq ? null : `faq-${index}`)}
+                                    className="w-full px-6 py-5 flex items-center justify-between text-left"
+                                >
+                                    <span className="text-lg font-semibold">{faq.question}</span>
+                                    <ChevronDown
+                                        className={`h-5 w-5 transition-transform flex-shrink-0 ml-4 ${openFaq === `faq-${index}` ? "rotate-180" : ""
+                                            }`}
+                                    />
+                                </button>
+                                {openFaq === `faq-${index}` && (
+                                    <div className="px-6 pb-5 text-slate-600 dark:text-slate-200">
+                                        {faq.answer}
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* CTA Section */}
+            <section className="py-20 px-4 bg-slate-100 dark:bg-slate-800/30" id="contact">
+                <div className="container mx-auto max-w-6xl">
+                    <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-12 text-center">
+                        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
+                            Haz Realidad Tu Sueño Hoy
+                        </h2>
+                        <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+                            No importa cuál sea tu oficio o tu nivel de experiencia. Si tienes la determinación,
+                            nosotros tenemos el camino. Agenda una consulta gratuita y descubre cómo BigDreamers
+                            puede impulsar tu emprendimiento.
+                        </p>
+                        <a
+                            href="mailto:dreamersb648@gmail.com"
+                            className="text-white bg-yellow-500 hover:bg-blue-100 hover:text-blue-600 font-bold px-10 py-4 rounded-lg transition-colors inline-flex items-center gap-2 text-lg"
+                        >
+                            Comenzar Ahora
+                            <ArrowRight className="h-5 w-5" />
+                        </a>
+                    </div>
+                </div>
+            </section>
             <Chatbot />
-        </>
+            <ThemeToggle />
+            <Footer />
+        </div>
     );
 }
