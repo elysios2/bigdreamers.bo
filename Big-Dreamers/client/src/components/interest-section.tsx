@@ -59,14 +59,14 @@ export default function InterestSection() {
     ];
 
     return (
-        <section id="investment" className="py-20 bg-gray-50 dark:bg-gray-900">
+        <section id="investment" className="py-20">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-16">
                     <h2
                         className="text-3xl md:text-4xl font-bold mb-4 text-gray-800 dark:text-white"
                         data-aos="fade-up"
                     >
-                        Donde Tus <span className="text-green-500">Sueños</span> Se Hacen <span className="text-green-500">Rentables</span>
+                        Donde Tus <span className="text-yellow-400">Sueños</span> Se Hacen <span className="text-yellow-400">Rentables</span>
                     </h2>
                     <p
                         className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
@@ -82,7 +82,7 @@ export default function InterestSection() {
                     {plans.map((plan, index) => (
                         <div
                             key={plan.id}
-                            className="rounded-xl overflow-hidden transition-transform duration-300 hover:-translate-y-3 shadow-lg hover:shadow-2xl bg-white dark:bg-gray-800"
+                            className="rounded-xl overflow-hidden transition-transform duration-300 hover:-translate-y-3 shadow-lg hover:shadow-4xl bg-white"
                             data-aos="fade-up"
                             data-aos-delay={index * 100}
                         >
