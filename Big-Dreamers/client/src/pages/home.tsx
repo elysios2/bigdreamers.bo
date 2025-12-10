@@ -35,8 +35,8 @@ export default function Home() {
       
       <main className="pt-20">
         <HeroSection />
-        <InterestSection />
         <InvestmentPlans />
+        <InterestSection />
         <VideoSection />
         <ContactForm />
       </main>
