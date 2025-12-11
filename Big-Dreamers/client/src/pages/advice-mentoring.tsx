@@ -286,18 +286,18 @@ export default function AdviceMentoring() {
             {/* CTA Section */}
             <section className="py-20 px-4 bg-slate-100 dark:bg-slate-800/30" id="contact">
                 <div className="container mx-auto max-w-6xl">
-                    <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-12 text-center">
-                        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
+                    <div className="bg-white rounded-2xl p-12 text-center">
+                        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-black dark:text-white">
                             Haz Realidad Tu Sueño Hoy
                         </h2>
-                        <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+                        <p className="text-xl text-gray-500 mb-8 max-w-2xl mx-auto dark:text-white">
                             No importa cuál sea tu oficio o tu nivel de experiencia. Si tienes la determinación,
                             nosotros tenemos el camino. Agenda una consulta gratuita y descubre cómo BigDreamers
                             puede impulsar tu emprendimiento.
                         </p>
                         <a
                             href="mailto:dreamersb648@gmail.com"
-                            className="text-white bg-yellow-500 hover:bg-blue-100 hover:text-blue-600 font-bold px-10 py-4 rounded-lg transition-colors inline-flex items-center gap-2 text-lg"
+                            className="text-white bg-yellow-500 hover:bg-yellow-400 font-bold px-10 py-4 rounded-lg transition-colors inline-flex items-center gap-2 text-lg"
                         >
                             Comenzar Ahora
                             <ArrowRight className="h-5 w-5" />
