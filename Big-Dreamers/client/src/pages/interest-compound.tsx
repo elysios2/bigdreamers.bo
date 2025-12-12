@@ -5,7 +5,7 @@ import {
   ArrowRight,
   BarChart,
 } from "lucide-react";
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 import ThreeStepForm from "@/components/ThreeStepForm";
 
 export default function InterestCompound() {
@@ -28,7 +28,7 @@ export default function InterestCompound() {
     <div className="min-h-screen pt-20 pb-16">
       <div className="container mx-auto px-4">
         <Link
-          href="/"
+          to="/"
           className="inline-flex items-center text-primary hover:text-[#ff0066] dark:text-white dark:hover:text-[#feba2b] mb-6"
         >
           <ArrowLeft className="h-4 w-4 mr-2" />
@@ -135,7 +135,7 @@ export default function InterestCompound() {
                   </div>
                 </div>
                 <Link
-                  href="/casos-de-exito"
+                  to="/casos-de-exito"
                   className="mt-4 md:mt-0 inline-flex items-center bg-white text-[#feba2b] dark:text-white px-5 py-2 rounded-lg font-medium hover:bg-opacity-90 transition"
                 >
                   Ver
