@@ -13,6 +13,9 @@ import Blog from "@/pages/blog";
 import InvestorGuide from "@/pages/investor-guide";
 import Startups from "@/pages/startups";
 import Gracias from "@/pages/Gracias";
+import InterestSimple from "@/pages/interest-simple";
+import InterestCompound from "@/pages/interest-compound";
+import InteresttMixed from "@/pages/interest-mixed";
 
 function Router() {
   return (
@@ -21,7 +24,11 @@ function Router() {
       <Route path="/plan/corto-plazo" component={ShortTermPlan} />
       <Route path="/plan/mediano-plazo" component={MediumTermPlan} />
       <Route path="/plan/largo-plazo" component={LongTermPlan} />
+      <Route path="/interes/simple" component={InterestSimple} />
+      <Route path="/interes/compuesto" component={InterestCompound} />
+      <Route path="/interes/mixto" component={InteresttMixed} />
       <Route path="/casos-de-exito" component={SuccessStories} />
+      <Route path="" component={InterestSimple} />
       <Route path="/about-us" component={AboutUs} />
       <Route path="/blog" component={Blog} />
       <Route path="/investor-guide" component={InvestorGuide} />

@@ -12,7 +12,7 @@ export default function InterestSection() {
             rate: "1.5% – 2.5%",
             time: "6 – 24 meses",
             minInvestment: "7.000 Bs",
-            route: "/plan/interes-simple",
+            route: "/interes/simple",
             color: "#048abf",
             features: [
                 "Rentabilidad fija mensual según duración",
@@ -30,7 +30,7 @@ export default function InterestSection() {
             rate: "1.5% – 2.5%",
             time: "6 – 24 meses",
             minInvestment: "7.000 Bs",
-            route: "/plan/interes-compuesto",
+            route: "/interes/compuesto",
             color: "#feba2b",
             features: [
                 "Crecimiento progresivo del capital",
@@ -46,7 +46,7 @@ export default function InterestSection() {
             rate: "1.5% – 2.5%",
             time: "6 – 24 meses",
             minInvestment: "7.000 Bs",
-            route: "/plan/interes-mixto",
+            route: "/interes/mixto",
             color: "#048abf",
             features: [
                 "Combina liquidez del simple y crecimiento del compuesto",
@@ -73,7 +73,7 @@ export default function InterestSection() {
                         data-aos="fade-up"
                         data-aos-delay="100"
                     >
-                        No esperes más: tu futuro financiero se construye con pasos inteligentes. <br/> 
+                        No esperes más: tu futuro financiero se construye con pasos inteligentes. <br />
                         Elegí tu plan y hacé que cada inversión cuente.
                     </p>
                 </div>
@@ -86,7 +86,7 @@ export default function InterestSection() {
                             data-aos="fade-up"
                             data-aos-delay={index * 100}
                         >
-                            <div className="p-6 relative">
+                            <div className="p-6 relative flex flex-col flex-1">
                                 <div
                                     className="absolute top-0 right-0 px-4 py-2 rounded-bl-lg font-bold text-white text-sm"
                                     style={{ backgroundColor: plan.color }}
@@ -117,7 +117,7 @@ export default function InterestSection() {
                                     ))}
                                 </div>
 
-                                <div className="flex space-x-3">
+                                <div className="flex space-x-3 mt-auto">
                                     <Link href={plan.route} className="flex-1">
                                         <button
                                             className="w-full py-2 rounded-md font-medium text-white transition-all hover:opacity-90"
