@@ -73,7 +73,7 @@ export default function ThreeStepForm({
     <form
       action={formAction}
       method="POST"
-      className="bg-slate-800 border border-slate-700 p-8 md:p-10 rounded-2xl shadow-2xl"
+      className="border dark:bg-blue-600 bg-white border-slate-700 p-8 md:p-10 rounded-2xl shadow-2xl"
     >
       <input type="hidden" name="_subject" value={formSubject} />
       <input type="hidden" name="_captcha" value="false" />
@@ -89,19 +89,19 @@ export default function ThreeStepForm({
         {[1, 2, 3].map((step) => (
           <div key={step} className="relative w-1/3 flex flex-col items-center">
             <div
-              className={`w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3 font-semibold transition-all duration-300 relative z-10 ${
+              className={`w-10 h-10 text-slate-200 rounded-full flex items-center justify-center mx-auto mb-3 font-semibold transition-all duration-300 relative z-10 ${
                 activeStep >= step
-                  ? "bg-blue-600 text-white shadow-lg shadow-blue-600/50"
-                  : "bg-slate-700 text-slate-400"
+                  ? "bg-blue-600  shadow-lg shadow-blue-600/50"
+                  : "bg-slate-700 text-slate-200"
               }`}
             >
               {activeStep > step ? <Check className="w-5 h-5" /> : step}
             </div>
             <p
-              className={`text-sm text-center transition-colors duration-300 ${
+              className={`text-sm dark:text-slate-300 text-center transition-colors duration-300 ${
                 activeStep >= step
-                  ? "text-white font-medium"
-                  : "text-slate-500"
+                  ? " font-medium"
+                  : "text-slate-300"
               }`}
             >
               {step === 1 ? "Información" : step === 2 ? "Monto" : "Confirmación"}
@@ -112,12 +112,12 @@ export default function ThreeStepForm({
 
       {activeStep === 1 && (
         <div className="space-y-6">
-          <h3 className="text-2xl font-bold text-white mb-6">Información personal</h3>
+          <h3 className="text-2xl font-bold  mb-6">Información personal</h3>
           <div className="grid md:grid-cols-2 gap-6">
             {(["nombre", "apellidos", "email", "telefono"] as const).map(
               (field) => (
                 <div key={field}>
-                  <label className="block mb-2 capitalize text-slate-300 font-medium">
+                  <label className="block mb-2 capitalize dark:text-slate-300 font-medium">
                     {field}
                   </label>
                   <input
@@ -131,7 +131,7 @@ export default function ThreeStepForm({
                     }
                     value={formData[field]}
                     onChange={handleChange}
-                    className="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 transition-all"
+                    className="w-full p-3 border text-black border-slate-700 rounded-lg  placeholder-slate-500 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 transition-all"
                     required
                   />
                 </div>
@@ -143,9 +143,9 @@ export default function ThreeStepForm({
 
       {activeStep === 2 && (
         <div className="space-y-6">
-          <h3 className="text-2xl font-bold text-white mb-6">Detalles de la inversión</h3>
+          <h3 className="text-2xl font-bold dark:text-slate-200 mb-6">Detalles de la inversión</h3>
           <div>
-            <label className="block mb-2 text-slate-300 font-medium">Monto a invertir ($)</label>
+            <label className="block mb-2 dark:text-slate-300 font-medium">Monto a invertir ($)</label>
             <div className="relative">
               <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400">
                 <DollarSign className="w-5 h-5" />
@@ -156,13 +156,13 @@ export default function ThreeStepForm({
                 value={formData.monto}
                 onChange={handleChange}
                 placeholder={`Mínimo ${duration === 12 ? 2000 : 2500}$`}
-                className="w-full p-3 pl-12 bg-slate-900 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 transition-all"
+                className="w-full p-3 pl-12 text-black  border border-slate-700 rounded-lg  placeholder-slate-500 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 transition-all"
                 required
               />
             </div>
           </div>
           <div>
-            <label className="block mb-2 text-slate-300 font-medium">Fecha de inicio</label>
+            <label className="block mb-2 dark:text-slate-300 font-medium">Fecha de inicio</label>
             <div className="relative">
               <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400">
                 <Calendar className="w-5 h-5" />
@@ -172,13 +172,13 @@ export default function ThreeStepForm({
                 type="date"
                 value={formData.fecha}
                 onChange={handleChange}
-                className="w-full p-3 pl-12 bg-slate-900 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 transition-all"
+                className="w-full p-3 pl-12 text-black border border-slate-700 rounded-lg placeholder-slate-500 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 transition-all"
                 required
               />
             </div>
           </div>
           <div>
-            <label className="block mb-2 text-slate-300 font-medium">Método de pago</label>
+            <label className="block mb-2 dark:text-slate-300 font-medium">Método de pago</label>
             <div className="relative">
               <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400">
                 <Wallet className="w-5 h-5" />
@@ -187,7 +187,7 @@ export default function ThreeStepForm({
                 name="metodo"
                 value={formData.metodo}
                 onChange={handleChange}
-                className="w-full p-3 pl-12 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 transition-all appearance-none cursor-pointer"
+                className="w-full p-3 pl-12 text-black border border-slate-700 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 transition-all appearance-none cursor-pointer"
                 required
               >
                 <option>Transferencia bancaria</option>
@@ -202,7 +202,7 @@ export default function ThreeStepForm({
       {activeStep === 3 && (
         <div className="space-y-6">
           <h3 className="text-2xl font-bold text-white mb-6">Confirmación</h3>
-          <div className="bg-slate-900 border border-slate-700 p-6 rounded-xl mb-6">
+          <div className=" border border-slate-700 p-6 rounded-xl mb-6">
             <div className="flex justify-between py-3 border-b border-slate-700">
               <span className="text-slate-400">Plan</span>
               <span className="text-white font-medium">
@@ -211,15 +211,15 @@ export default function ThreeStepForm({
             </div>
             <div className="flex justify-between py-3 border-b border-slate-700">
               <span className="text-slate-400">Monto</span>
-              <span className="text-white font-medium">{formData.monto || "N/A"} $</span>
+              <span className=" font-medium">{formData.monto || "N/A"} $</span>
             </div>
             <div className="flex justify-between py-3 border-b border-slate-700">
               <span className="text-slate-400">Fecha</span>
-              <span className="text-white font-medium">{formData.fecha || "N/A"}</span>
+              <span className=" font-medium">{formData.fecha || "N/A"}</span>
             </div>
             <div className="flex justify-between py-3 border-b border-slate-700">
               <span className="text-slate-400">Método de pago</span>
-              <span className="text-white font-medium">{formData.metodo || "N/A"}</span>
+              <span className=" font-medium">{formData.metodo || "N/A"}</span>
             </div>
             <div className="flex justify-between py-3">
               <span className="text-slate-400">Rentabilidad</span>
@@ -231,7 +231,7 @@ export default function ThreeStepForm({
             <input key={key} type="hidden" name={key} value={value} />
           ))}
 
-          <div className="flex items-center bg-slate-900 border border-slate-700 p-4 rounded-lg">
+          <div className="flex items-center border border-slate-700 p-4 rounded-lg">
             <input
               type="checkbox"
               id="terms"
@@ -257,7 +257,7 @@ export default function ThreeStepForm({
           className={`px-6 py-3 rounded-lg font-medium transition-all ${
             activeStep === 1
               ? "invisible"
-              : "bg-slate-700 text-white hover:bg-slate-600 border border-slate-600"
+              : " hover:bg-slate-600 border border-slate-600"
           }`}
         >
           <ArrowLeft className="inline-block mr-2 w-5 h-5" /> Anterior
@@ -267,14 +267,14 @@ export default function ThreeStepForm({
           <button
             type="button"
             onClick={handleNext}
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg flex items-center hover:bg-blue-700 transition-all font-medium shadow-lg shadow-blue-600/30"
+            className="px-6 py-3 bg-blue-600 rounded-lg flex items-center hover:bg-blue-700 transition-all font-medium shadow-lg shadow-blue-600/30"
           >
             Siguiente <ArrowRight className="ml-2 w-5 h-5" />
           </button>
         ) : (
           <button
             type="submit"
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg flex items-center hover:bg-blue-700 transition-all font-medium shadow-lg shadow-blue-600/30"
+            className="px-6 py-3 bg-blue-600  rounded-lg flex items-center hover:bg-blue-700 transition-all font-medium shadow-lg shadow-blue-600/30"
           >
             <Check className="mr-2 w-5 h-5" /> Enviar
           </button>
