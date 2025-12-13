@@ -73,7 +73,7 @@ export default function ThreeStepForm({
     <form
       action={formAction}
       method="POST"
-      className="border dark:bg-blue-600 bg-white border-slate-700 p-8 md:p-10 rounded-2xl shadow-2xl"
+      className="border bg-white border-slate-700 p-8 md:p-10 rounded-2xl shadow-2xl"
     >
       <input type="hidden" name="_subject" value={formSubject} />
       <input type="hidden" name="_captcha" value="false" />
