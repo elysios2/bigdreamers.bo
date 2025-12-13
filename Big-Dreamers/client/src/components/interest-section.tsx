@@ -82,7 +82,7 @@ export default function InterestSection() {
                     {plans.map((plan, index) => (
                         <div
                             key={plan.id}
-                            className="rounded-xl overflow-hidden transition-transform duration-300 hover:-translate-y-3 shadow-lg hover:shadow-4xl bg-white flex flex-col"
+                            className="neumorph rounded-xl overflow-hidden transition-all duration-300 hover:translate-y-[-8px] flex flex-col"
                             data-aos="fade-up"
                             data-aos-delay={index * 100}
                         >
