@@ -130,7 +130,7 @@ export default function AdviceMentoring() {
             <Navbar />
             {/* Hero Section */}
             <section className="relative pt-40 pb-24 px-4 overflow-hidden">
-                <div className="absolute inset-0 dark:bg-gradient-to-br dark:from-blue-600/20 dark:via-purple-600/20 dark:to-blue-800/20"></div>
+                <div className="absolute inset-0"></div>
                 <div className="container mx-auto max-w-6xl relative z-10">
                     <div className="max-w-4xl mx-auto text-center">
                         <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
