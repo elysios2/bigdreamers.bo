@@ -267,7 +267,7 @@ export default function ThreeStepForm({
           <button
             type="button"
             onClick={handleNext}
-            className="px-6 py-3 bg-blue-600 rounded-lg flex items-center hover:bg-blue-700 transition-all font-medium shadow-lg shadow-blue-600/30"
+            className="px-6 py-3 text-white bg-blue-600 rounded-lg flex items-center hover:bg-blue-700 transition-all font-medium shadow-lg shadow-blue-600/30"
           >
             Siguiente <ArrowRight className="ml-2 w-5 h-5" />
           </button>
