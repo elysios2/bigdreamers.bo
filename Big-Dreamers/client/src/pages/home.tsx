@@ -1,16 +1,11 @@
 import { useEffect } from "react";
 import Navbar from "@/components/navbar";
-import HeroSection from "@/components/hero-section";
-import LogoCarousel from "@/components/logo-carousel";
-import InvestmentPlans from "@/components/investment-plans";
-import VideoSection from "@/components/video-section";
-import ContactForm from "@/components/contact-form";
-import TeamSection from "@/components/team-section";
-import InterestSection from "@/components/interest-section";
 import Footer from "@/components/footer";
 import Modals from "@/components/modals";
 import ThemeToggle from "@/components/theme-toggle";
 import Chatbot from "@/components/chatbot";
+import HeroV2 from "@/components/hero-v2";
+import AdviceMentoring from "@/pages/advice-mentoring";
 
 
 import AOS from "aos";
@@ -34,11 +29,8 @@ export default function Home() {
       <Navbar />
       
       <main className="pt-20">
-        <HeroSection />
-        <InvestmentPlans />
-        <InterestSection />
-        <VideoSection />
-        <ContactForm />
+        <HeroV2 />
+        <AdviceMentoring />
       </main>
       
       <Footer />
