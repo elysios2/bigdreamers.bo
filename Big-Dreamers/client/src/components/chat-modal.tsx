@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
-import { Send, X, Bot, User } from "lucide-react";
+import { Send, X, User } from "lucide-react";
 import { format } from "date-fns";
+import Morfeus from "@/assets/morfeus.webp";
 
 interface Message {
   id: number;
@@ -105,7 +106,7 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
-      text: "¡Hola! Soy el asistente virtual de BigDreamers. ¿En qué puedo ayudarte hoy?",
+      text: "¡Hola! Soy Morfeus. ¿En qué puedo ayudarte hoy?",
       sender: "bot",
       timestamp: new Date(),
     },
@@ -113,7 +114,7 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -153,97 +154,129 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") handleSendMessage();
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSendMessage();
+    }
   };
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-white dark:bg-[#048abf] neumorph rounded-xl shadow-lg w-full max-w-md h-[500px] max-h-[90vh] overflow-hidden">
-        <div className="bg-[#048abf] dark:bg-[#036d9f] text-white p-4 flex justify-between items-center">
-          <div className="flex items-center">
-            <Bot className="h-6 w-6 mr-2" />
-            <h3 className="font-bold">Asistente BigDreamers</h3>
+    <section
+      role="dialog"
+      aria-modal="true"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+    >
+      <div className="flex h-[500px] max-h-[90vh] w-full max-w-md flex-col overflow-hidden rounded-xl bg-white shadow-xl dark:bg-[#048abf]">
+        {/* HEADER */}
+        <header className="flex items-center justify-between bg-[#048abf] px-4 py-3 text-white dark:bg-[#036d9f]">
+          <div className="flex items-center gap-2">
+            <div className="rounded-full bg-slate-200">
+              <img src={Morfeus} alt="Morfeus" className="h-10 w-10 rounded-full object-contain" />
+            </div>
+            <h2 className="text-sm font-bold">Asistente BigDreamers</h2>
           </div>
-          <button onClick={onClose} className="text-white hover:text-gray-200">
+          <button
+            onClick={onClose}
+            aria-label="Cerrar chat"
+            className="rounded-md p-1 transition hover:bg-white/10"
+          >
             <X className="h-5 w-5" />
           </button>
-        </div>
-        <div className="p-4 h-[calc(100%-132px)] overflow-y-auto bg-gray-50 dark:bg-[#036d9f]">
-          {messages.map((msg) => (
-            <div
-              key={msg.id}
-              className={`mb-4 flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
-            >
-              <div
-                className={`${msg.sender === "user" ? "bg-[#048abf] text-white rounded-tr-none" : "bg-white dark:bg-[#048abf] text-gray-800 dark:text-white rounded-tl-none shadow"} max-w-[80%] p-3 rounded-lg`}
-              >
-                <div className="flex items-center mb-1">
-                  {msg.sender === "bot" ? (
-                    <Bot className="h-4 w-4 mr-1 text-[#feba2b]" />
-                  ) : (
-                    <User className="h-4 w-4 mr-1 text-white" />
-                  )}
-                  <span
-                    className={`text-xs ${msg.sender === "user" ? "text-gray-100" : "text-gray-500 dark:text-gray-300"}`}
-                  >
-                    {format(msg.timestamp, "HH:mm")}
-                  </span>
+        </header>
+
+
+        {/* MESSAGES */}
+        <main className="flex-1 space-y-4 overflow-y-auto bg-gray-50 p-4 dark:bg-[#036d9f]">
+          {messages.map((msg) =>
+            msg.sender === "bot" ? (
+              <article key={msg.id} className="flex items-start gap-3">
+                {/* Bot avatar */}
+                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-200">
+                  <img src={Morfeus} alt="Morfeus" className="h-10 w-10 rounded-full object-contain" />
                 </div>
-                <p>{msg.text}</p>
-              </div>
-            </div>
-          ))}
-          {isTyping && (
-            <div className="flex justify-start mb-4">
-              <div className="bg-white dark:bg-[#048abf] p-3 rounded-lg rounded-tl-none shadow max-w-[80%]">
-                <div className="flex items-center">
-                  <Bot className="h-4 w-4 mr-1 text-[#feba2b]" />
-                  <span className="text-xs text-gray-500 dark:text-gray-300">
-                    {format(new Date(), "HH:mm")}
-                  </span>
+
+                {/* Bot bubble */}
+                <div className="max-w-[75%] rounded-2xl rounded-tl-none bg-white p-3 shadow dark:bg-[#048abf]">
+                  <header className="mb-1 flex items-center gap-2">
+                    <span className="text-xs font-semibold text-gray-700 dark:text-white">
+                      Morfeus
+                    </span>
+                    <time className="text-xs text-gray-400 dark:text-gray-300">
+                      {format(msg.timestamp, "HH:mm")}
+                    </time>
+                  </header>
+                  <p className="text-sm leading-relaxed text-gray-800 dark:text-white">
+                    {msg.text}
+                  </p>
                 </div>
-                <div className="flex space-x-1 mt-1">
-                  <div
-                    className="h-2 w-2 bg-gray-400 dark:bg-gray-300 rounded-full animate-bounce"
-                    style={{ animationDelay: "0ms" }}
-                  />
-                  <div
-                    className="h-2 w-2 bg-gray-400 dark:bg-gray-300 rounded-full animate-bounce"
-                    style={{ animationDelay: "150ms" }}
-                  />
-                  <div
-                    className="h-2 w-2 bg-gray-400 dark:bg-gray-300 rounded-full animate-bounce"
-                    style={{ animationDelay: "300ms" }}
-                  />
+              </article>
+            ) : (
+              <article key={msg.id} className="flex items-start justify-end gap-3">
+                {/* User bubble */}
+                <div className="max-w-[75%] rounded-2xl rounded-tr-none bg-[#1c908e] p-3 text-white">
+                  <header className="mb-1 flex justify-end">
+                    <time className="text-xs text-blue-100">
+                      {format(msg.timestamp, "HH:mm")}
+                    </time>
+                  </header>
+                  <p className="text-sm leading-relaxed">{msg.text}</p>
                 </div>
-              </div>
-            </div>
+
+
+                {/* User avatar */}
+                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#048abf]">
+                  <User className="h-5 w-5 text-white" />
+                </div>
+              </article>
+            )
           )}
+
+
+          {/* Typing indicator */}
+          {isTyping && (
+            <article className="flex items-start gap-3">
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-200">
+                <img src={Morfeus} alt="Morfeus" className="h-10 w-10 rounded-full object-contain" />
+              </div>
+              <div className="rounded-2xl rounded-tl-none bg-white p-3 shadow dark:bg-[#048abf]">
+                <div className="flex gap-1">
+                  <span className="h-2 w-2 animate-bounce rounded-full bg-gray-400" />
+                  <span className="h-2 w-2 animate-bounce rounded-full bg-gray-400 [animation-delay:150ms]" />
+                  <span className="h-2 w-2 animate-bounce rounded-full bg-gray-400 [animation-delay:300ms]" />
+                </div>
+              </div>
+            </article>
+          )}
+
+
           <div ref={messagesEndRef} />
-        </div>
-        <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-[#048abf]">
+        </main>
+
+
+        {/* INPUT */}
+        <footer className="border-t border-gray-200 bg-white p-3 dark:border-gray-700 dark:bg-[#048abf]">
           <div className="flex">
-            <input
+            <textarea
               ref={inputRef}
-              type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Escribe tu mensaje..."
-              className="flex-1 p-3 rounded-l-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#048abf] dark:focus:ring-[#feba2b] dark:bg-[#036d9f] dark:text-white"
+              style={{ resize: "none", fieldSizing:"content" }}
+              className="flex-1 rounded-l-lg border border-gray-300 p-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#048abf] dark:border-gray-600 dark:bg-[#036d9f] dark:text-white dark:focus:ring-[#feba2b]"
             />
             <button
               onClick={handleSendMessage}
               disabled={!inputValue.trim() || isTyping}
-              className={`bg-[#feba2b] text-white p-3 rounded-r-lg transition-colors ${!inputValue.trim() || isTyping ? "opacity-50 cursor-not-allowed" : "hover:bg-[#e0a61f]"}`}
+              className="rounded-r-lg bg-[#feba2b] px-4 text-white transition hover:bg-[#e0a61f] disabled:cursor-not-allowed disabled:opacity-50"
             >
               <Send className="h-5 w-5" />
             </button>
           </div>
-        </div>
+        </footer>
       </div>
-    </div>
+    </section>
   );
 }
