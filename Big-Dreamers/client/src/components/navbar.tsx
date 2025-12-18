@@ -11,8 +11,8 @@ export default function Navbar() {
 
   const navlinksLeft = [
     { name: "Sobre Nosotros", href: "/about-us" },
-    { name: "Asesoria y Mentoria", href: "/asesoria-mentoria" },
-    { name: "Inversión", href: "#investment" },
+    { name: "Asesoria y Mentoria", href: "/" },
+    { name: "Inversión", href: "/investments" },
   ];
 
   const navlinksRight = [
