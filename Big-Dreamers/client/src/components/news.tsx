@@ -80,9 +80,9 @@ export default function News(): JSX.Element {
 
                 if (!map.has(a.link)) {
                     map.set(a.link, {
-                        title: a.title ?? "Sin título",
+                        title: a.title ?? "Noticia Reciente",
                         link: a.link,
-                        description: a.description ?? "Sin descripción",
+                        description: a.description ?? "",
                         image: a.image_url,
                         source: a.country?.includes("bolivia")
                             ? "Bolivia"
