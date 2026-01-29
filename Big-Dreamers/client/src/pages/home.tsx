@@ -10,6 +10,7 @@ import AdviceMentoring from "@/pages/advice-mentoring";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
+import News from "@/components/news";
 
 export default function Home() {
   useEffect(() => {
@@ -30,6 +31,7 @@ export default function Home() {
       
       <main className="pt-20">
         <HeroV2 />
+        <News />
         <AdviceMentoring />
       </main>
       
