@@ -9,7 +9,6 @@ import Morfeus from "@/assets/morfeus.webp";
 import { fetchNewsBolivia, fetchNewsInternational } from "@/utils/news";
 import type { NewsItem } from "@/types/news";
 
-
 export default function News(): JSX.Element {
     const [news, setNews] = useState<NewsItem[]>([]);
     const [newsBolivia, setNewsBolivia] = useState<NewsItem[]>([]);
@@ -125,9 +124,14 @@ export default function News(): JSX.Element {
                 </button>
             </section>
 
-            <h2 className="text-3xl md:text-4xl font-bold my-12 text-center">
-                Enteraté de las noticias económicas locales
-            </h2>
+            
+            {
+                newsBolivia.length > 0 && (
+                    <h2 className="text-3xl md:text-4xl font-bold my-12 text-center">
+                        Enteraté de las noticias económicas locales
+                    </h2>
+                )
+            }
 
             <section className="relative">
                 {
