@@ -1,8 +1,4 @@
-import { 
-  MapPin, 
-  Phone, 
-  Mail 
-} from "lucide-react";
+import { LogIn } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -15,10 +11,11 @@ export default function Footer() {
               <span className="text-[#feba2b]">Dreamers</span>
             </h3>
             <p className="text-gray-300 mb-6">
-              Conectamos inversionistas con startups prometedoras para construir valor y avanzar juntos.
+              Conectamos inversionistas con startups prometedoras para construir
+              valor y avanzar juntos.
             </p>
           </div>
-          
+
           <div>
             <h4 className="text-lg font-semibold mb-4">Enlaces rápidos</h4>
             <ul className="space-y-2">
@@ -28,7 +25,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#about" className="text-gray-300 hover:text-white transition-colors">
+                <a href="/about-us" className="text-gray-300 hover:text-white transition-colors">
                   Sobre Nosotros
                 </a>
               </li>
@@ -44,7 +41,7 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-          
+
           <div>
             <h4 className="text-lg font-semibold mb-4">Recursos</h4>
             <ul className="space-y-2">
@@ -58,39 +55,34 @@ export default function Footer() {
                   Guía del inversor
                 </a>
               </li>
-              <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">
-                  
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">
-                  
-                </a>
-              </li>
             </ul>
           </div>
-          
-          
-        </div>
-        
-        <hr className="border-gray-700 my-8" />
-        
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm mb-4 md:mb-0">
-            © {new Date().getFullYear()} Big Dreamers. Todos los derechos reservados.
-          </p>
-          <div className="flex space-x-6">
-            <a href="#" className="text-gray-400 text-sm hover:text-white transition-colors">
-              
-            </a>
-            <a href="#" className="text-gray-400 text-sm hover:text-white transition-colors">
-              Términos y Condiciones
-            </a>
-            <a href="#" className="text-gray-400 text-sm hover:text-white transition-colors">
-             
+
+          {/* Admin access */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Equipo</h4>
+            <p className="text-gray-400 text-sm mb-4">
+              ¿Eres parte del equipo de Bigdreamers?
+            </p>
+            <a href="/login" className="inline-flex items-center gap-2 bg-[#048abf] hover:bg-[#036d9f] text-white font-semibold px-5 py-2.5 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5 group">
+              <LogIn size={17} className="group-hover:translate-x-0.5 transition-transform" />
+              Iniciar sesión
             </a>
           </div>
+        </div>
+
+        <hr className="border-gray-700 my-8" />
+
+        <div className="flex flex-col justify-center items-center">
+	<a href="https://www.bytetwo.digital" 
+	rel="opener, referrer"
+	target="_blank"
+	className="uppercase text-gray-400 text-xl hover:text-blue-400 cursor-pointer">
+            powered by bytetwo
+          </a>
+          <p className="text-gray-400 text-sm my-4 md:mb-0">
+            © {new Date().getFullYear()} Big Dreamers. Todos los derechos reservados.
+          </p>
         </div>
       </div>
     </footer>

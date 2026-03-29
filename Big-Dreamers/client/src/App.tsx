@@ -16,7 +16,9 @@ import Gracias from "@/pages/Gracias";
 import InterestSimple from "@/pages/interest-simple";
 import InterestCompound from "@/pages/interest-compound";
 import InteresttMixed from "@/pages/interest-mixed";
-import Investments from "@/pages/investments";
+import AdviceMentoring from "@/pages/advice-mentoring";
+import Admin from "./components/admin";
+import Login from "./components/login";
 
 function Router() {
   return (
@@ -30,13 +32,15 @@ function Router() {
         <Route path="/interes/compuesto" element={<InterestCompound />} />
         <Route path="/interes/mixto" element={<InteresttMixed />} />
         <Route path="/casos-de-exito" element={<SuccessStories />} />
-        <Route path="/investments" element={<Investments />} />
+        <Route path="/asesoria-mentoria" element={<AdviceMentoring />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/investor-guide" element={<InvestorGuide />} />
         <Route path="/startups" element={<Startups />} />
         <Route path="/gracias" element={<Gracias />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </BrowserRouter>
   );
