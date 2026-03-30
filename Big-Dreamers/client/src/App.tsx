@@ -17,14 +17,16 @@ import InterestSimple from "@/pages/interest-simple";
 import InterestCompound from "@/pages/interest-compound";
 import InteresttMixed from "@/pages/interest-mixed";
 import AdviceMentoring from "@/pages/advice-mentoring";
-import Admin from "./components/admin";
-import Login from "./components/login";
+import Admin from "@/components/admin";
+import Login from "@/components/login";
+import Investments from "@/pages/investments";
 
 function Router() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/investments" element={<Investments />} />
         <Route path="/plan/corto-plazo" element={<ShortTermPlan />} />
         <Route path="/plan/mediano-plazo" element={<MediumTermPlan />} />
         <Route path="/plan/largo-plazo" element={<LongTermPlan />} />

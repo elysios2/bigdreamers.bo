@@ -156,7 +156,7 @@ export default function News(): JSX.Element {
                             target="_blank"
                             rel="noreferrer"
                             className="
-                                group max-w-[320px] h-[420px]
+                                group min-w-[320px] h-[420px]
                                 shadow-xl
                                 flex flex-col rounded-xl overflow-hidden
                                 dark:bg-gradient-to-b
