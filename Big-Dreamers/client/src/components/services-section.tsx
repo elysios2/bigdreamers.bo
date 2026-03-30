@@ -6,7 +6,7 @@ import { AdviceMentoringSection } from "@/types/advice-mentoring-section";
 
 export default function ServicesSection({ openFaq, setOpenFaq }: AdviceMentoringSection) {
     return (
-        <section className="py-20 px-4">
+        <section className="py-20 px-4" id="services">
             <div className="container mx-auto max-w-6xl">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
                     Servicios de Asesoría Adaptados a Tu Realidad

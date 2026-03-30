@@ -1,6 +1,28 @@
 import { LogIn } from "lucide-react";
 
 export default function Footer() {
+  const links = [
+    {
+      name: "Inicio",
+      href: "#"
+    },
+    {
+      name: "Sobre Nosotros",
+      href: "/about-us"
+    },
+    {
+      name: "Inversión",
+      href: "/investments"
+    },
+    {
+      name: "Blog",
+      href: "/blog"
+    },
+    {
+      name: "Contacto",
+      href: "#contact"
+    },
+  ];
   return (
     <footer className="bg-gray-800 text-white py-12">
       <div className="container mx-auto px-4">
@@ -19,26 +41,15 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4">Enlaces rápidos</h4>
             <ul className="space-y-2">
-              <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">
-                  Inicio
-                </a>
-              </li>
-              <li>
-                <a href="/about-us" className="text-gray-300 hover:text-white transition-colors">
-                  Sobre Nosotros
-                </a>
-              </li>
-              <li>
-                <a href="/investment" className="text-gray-300 hover:text-white transition-colors">
-                  Inversión
-                </a>
-              </li>
-              <li>
-                <a href="#contact" className="text-gray-300 hover:text-white transition-colors">
-                  Contacto
-                </a>
-              </li>
+              {
+                links.map((link) => (
+                  <li>
+                    <a href={link.href} className="text-gray-300 hover:text-white transition-colors">
+                      {link.name}
+                    </a>
+                  </li>
+                ))
+              }
             </ul>
           </div>
 
@@ -74,10 +85,10 @@ export default function Footer() {
         <hr className="border-gray-700 my-8" />
 
         <div className="flex flex-col justify-center items-center">
-	<a href="https://www.bytetwo.digital" 
-	rel="opener, referrer"
-	target="_blank"
-	className="uppercase text-gray-400 text-xl hover:text-blue-400 cursor-pointer">
+          <a href="https://www.bytetwo.digital"
+            rel="opener, referrer"
+            target="_blank"
+            className="uppercase text-gray-400 text-xl hover:text-blue-400 cursor-pointer">
             powered by bytetwo
           </a>
           <p className="text-gray-400 text-sm my-4 md:mb-0">
