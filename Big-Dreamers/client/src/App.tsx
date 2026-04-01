@@ -18,6 +18,7 @@ import InterestCompound from "@/pages/interest-compound";
 import InteresttMixed from "@/pages/interest-mixed";
 import AdviceMentoring from "@/pages/advice-mentoring";
 import Admin from "@/components/admin";
+import TeamMemberRegistration from "@/components/admin/TeamMemberRegistration";
 import Login from "@/components/login";
 import Investments from "@/pages/investments";
 
@@ -43,6 +44,7 @@ function Router() {
         <Route path="*" element={<NotFound />} />
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/admin/registrar-miembro" element={<TeamMemberRegistration />} />
       </Routes>
     </BrowserRouter>
   );
