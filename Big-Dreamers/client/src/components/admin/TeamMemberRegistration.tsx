@@ -205,13 +205,9 @@ export default function TeamMemberRegistration() {
                                 </select>
                             </div>
 
-                            <button
-                                type="submit"
-                                disabled={submitting}
-                                className="w-full flex items-center justify-center gap-2 rounded-xl bg-[#048abf] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#036d9f] disabled:opacity-60"
-                            >
-                                {submitting ? "Guardando..." : "Guardar miembro"}
-                            </button>
+                            <div className="flex justify-center">
+                                <button type="submit" className="w-max gap-2 rounded-xl bg-[#048abf] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#036d9f] disabled:opacity-60">Guardar miembro</button>
+                            </div>
                         </form>
                     </div>
                 </div>
