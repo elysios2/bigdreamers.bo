@@ -21,7 +21,7 @@ export default function TeamMemberRegistration() {
     const [formState, setFormState] = useState<TeamMemberFormPayload>(initialTeamMemberState);
     const [categories, setCategories] = useState<string[]>([]);
     const [loadingCategories, setLoadingCategories] = useState(true);
-    const [_, setSubmitting] = useState(false);
+    const [isSubmitting, setSubmitting] = useState(false);
     const [toast, setToast] = useState<ToastData>(null);
     const [imageFile, setImageFile] = useState<File | null>(null);
     const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -247,7 +247,9 @@ export default function TeamMemberRegistration() {
                             </div>
 
                             <div className="flex justify-center">
-                                <button type="submit" className="w-max gap-2 rounded-xl bg-[#048abf] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#036d9f] disabled:opacity-60">Guardar miembro</button>
+                                <button type="submit" 
+                                disabled={isSubmitting}
+                                className="w-max gap-2 rounded-xl bg-[#048abf] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#036d9f] disabled:opacity-60">Guardar miembro</button>
                             </div>
                         </form>
                     </div>
