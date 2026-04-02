@@ -79,6 +79,10 @@ export default function TeamMemberRegistration() {
                     showToast("error", "El número de WhatsApp debe tener al menos 8 caracteres.");
                     return;
                 }
+                if(!formState.imageFile) {
+                    showToast("error", "Debes subir una imagen.");
+                    return;
+                }
                 await createTeamMember(formState);
                 showToast("success", "Miembro agregado correctamente.");
                 setFormState(initialTeamMemberState);
