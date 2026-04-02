@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback, type FormEvent } from "react";
-import { ArrowLeft } from "lucide-react";
+import { useState, useEffect, useCallback, type FormEvent, type ChangeEvent, useRef } from "react";
+import { ArrowLeft, ImagePlus, X } from "lucide-react";
 import Navbar from "@/components/navbar";
 import ThemeToggle from "@/components/theme-toggle";
 import ToastNotification, { ToastData } from "@/components/admin/ToastNotification";
@@ -10,7 +10,7 @@ const initialTeamMemberState: TeamMemberFormPayload = {
     full_name: "",
     role: "",
     description: "",
-    photo_url: "",
+    imageFile: null,
     whatsapp: "",
     email: "",
     professional_link: "",
@@ -21,8 +21,11 @@ export default function TeamMemberRegistration() {
     const [formState, setFormState] = useState<TeamMemberFormPayload>(initialTeamMemberState);
     const [categories, setCategories] = useState<string[]>([]);
     const [loadingCategories, setLoadingCategories] = useState(true);
-    const [submitting, setSubmitting] = useState(false);
+    const [_, setSubmitting] = useState(false);
     const [toast, setToast] = useState<ToastData>(null);
+    const [imageFile, setImageFile] = useState<File | null>(null);
+    const [imagePreview, setImagePreview] = useState<string | null>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     const showToast = useCallback((type: "success" | "error", message: string) => {
         setToast({ type, message });
@@ -49,21 +52,41 @@ export default function TeamMemberRegistration() {
         setFormState((previous) => ({ ...previous, [field]: value }));
     }, []);
 
+    const handleImageChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (!file) return;
+        setImageFile(file);
+        setImagePreview(URL.createObjectURL(file));
+        setFormState((previous) => ({ ...previous, imageFile: file }));
+    }, []);
+
+    const clearImage = useCallback(() => {
+        setImageFile(null);
+        setImagePreview(null);
+        if (fileInputRef.current) {
+            fileInputRef.current.value = "";
+        }
+    }, []);
+
+
     const handleSubmit = useCallback(
         async (event: FormEvent<HTMLFormElement>) => {
             event.preventDefault();
             setSubmitting(true);
 
             try {
-                if(formState.whatsapp.length < 8) {
+                if (formState.whatsapp.length < 8) {
                     showToast("error", "El número de WhatsApp debe tener al menos 8 caracteres.");
                     return;
                 }
                 await createTeamMember(formState);
                 showToast("success", "Miembro agregado correctamente.");
                 setFormState(initialTeamMemberState);
-            } catch {
-                showToast("error", "No se pudo guardar el miembro del equipo.");
+                clearImage();
+            } catch (error: unknown) {
+                if (error instanceof Error) {
+                    showToast("error", error.message);
+                }
             } finally {
                 setSubmitting(false);
             }
@@ -131,23 +154,44 @@ export default function TeamMemberRegistration() {
                                 />
                             </div>
 
-                            <div className="grid gap-4 md:grid-cols-2">
-                                <div className="flex flex-col gap-2">
-                                    <input
-                                        value={formState.photo_url}
-                                        required
-                                        type="url"
-                                        onChange={(event) => handleChange("photo_url", event.target.value)}
-                                        placeholder="Enlace de foto"
-                                        className="w-full rounded-xl border border-gray-200 dark:border-[#036d9f] bg-gray-50 dark:bg-[#036d9f] px-4 py-2.5 text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#048abf] dark:focus:ring-[#feba2b] text-sm transition"
-                                    />
-                                    {
-                                        formState.photo_url && (
-                                            <img src={formState.photo_url} alt="Foto del miembro" className="w-full h-36 object-cover" />
-                                        )
-                                    }
-                                </div>
+                            <div>
+                                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1">
+                                    Imagen
+                                </label>
 
+                                {imagePreview ? (
+                                    <div className="relative rounded-xl overflow-hidden">
+                                        <img src={imagePreview} alt="Preview" className="w-full h-36 object-cover" />
+                                        <button
+                                            type="button"
+                                            onClick={clearImage}
+                                            className="absolute top-2 right-2 bg-black/60 hover:bg-black/80 text-white rounded-full p-1 transition"
+                                        >
+                                            <X size={14} />
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <button
+                                        type="button"
+                                        onClick={() => fileInputRef.current?.click()}
+                                        className="w-full h-28 rounded-xl border-2 border-dashed border-gray-300 dark:border-[#036d9f] hover:border-[#048abf] dark:hover:border-[#feba2b] flex flex-col items-center justify-center gap-2 text-gray-400 dark:text-gray-300 hover:text-[#048abf] dark:hover:text-[#feba2b] transition"
+                                    >
+                                        <ImagePlus size={24} />
+                                        <span className="text-xs font-medium">Haz clic para subir imagen</span>
+                                    </button>
+                                )}
+
+                                <input
+                                    ref={fileInputRef}
+                                    type="file"
+                                    accept="image/jpg, image/png, image/webp, image/jpeg"
+                                    onChange={handleImageChange}
+                                    className="hidden"
+                                />
+                            </div>
+
+
+                            <div className="grid gap-4 md:grid-cols-3">
                                 <div>
                                     <input
                                         value={formState.whatsapp}
@@ -158,9 +202,6 @@ export default function TeamMemberRegistration() {
                                         className="w-full rounded-xl border border-gray-200 dark:border-[#036d9f] bg-gray-50 dark:bg-[#036d9f] px-4 py-2.5 text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#048abf] dark:focus:ring-[#feba2b] text-sm transition"
                                     />
                                 </div>
-                            </div>
-
-                            <div className="grid gap-4 md:grid-cols-2">
                                 <div>
                                     <input
                                         value={formState.email}

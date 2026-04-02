@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback, type ChangeEvent, type FormEvent } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LogOut } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import Navbar from "@/components/navbar";
@@ -28,6 +28,7 @@ export default function Admin() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const toastTimeoutRef = useRef<number>();
+  const navigate = useNavigate();
 
   const showToast = useCallback((type: "success" | "error", message: string) => {
     setToast({ type, message });
@@ -50,7 +51,7 @@ export default function Admin() {
   useEffect(() => {
     const { data } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === "SIGNED_OUT" || !session) {
-        window.location.href = "/login";
+        navigate("/login");
       } else {
         setChecking(false);
       }
@@ -125,9 +126,9 @@ export default function Admin() {
       try {
         await deleteBlogPost(id);
         setPosts((previous) => previous.filter((post) => post.id !== id));
-        showToast("success", "Art�culo eliminado.");
+        showToast("success", "Articulo eliminado.");
       } catch {
-        showToast("error", "No se pudo eliminar el art�culo.");
+        showToast("error", "No se pudo eliminar el articulo.");
       } finally {
         setDeleteConfirm(null);
       }
@@ -137,7 +138,7 @@ export default function Admin() {
 
   const handleLogout = useCallback(async () => {
     await supabase.auth.signOut();
-    window.location.href = "/login";
+    navigate("/login");
   }, []);
 
   if (checking) {
