@@ -1,29 +1,51 @@
 export const industries = [
   {
     title: "Oficios y Artesanías",
-    examples: "Carpinteros, herreros, costureras, artesanos",
+    description: "Carpinteros, herreros y artesanos locales.",
     image:
-      "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=800&q=80",
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuBeIHsCQNycwjK-2i695sY5u8lgxCS7mdd6bbnFXVAOZS9Y_e8M4XE8I_RpNuCY6HYJLKShb0Vaw8aLccaI2_7DtKLbiG8VY2ROYf7_6JFHlQ1OW4Kpby6Y_wRM7M0f6uSI_B77P_bDtF0Uj1ao1DYA-C5is1Te-u9qZe6-48FIrlu2DYErzwjcwbvlbj4Zx7IZUfKUY6zFgZqFcMVdS_0lqandgk-YONH8yxbkoU61AYulX3W0gizD_GIS-U1IzasPTGrUFImCYcc",
+    col: "md:col-span-4",
+    row: "md:row-span-2",
   },
   {
-    title: "Gastronomía y Servicios",
-    examples: "Restaurantes, panaderías, catering, salones",
+    title: "Gastronomía",
+    description: "Restaurantes, catering y experiencias culinarias.",
     image:
-      "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=800&q=80",
+      "https://ik.imagekit.io/ov5b34jiy/bigdreamers_categories/gastronomy.webp",
+    col: "md:col-span-8",
+    row: "",
   },
   {
     title: "Tecnología y Digital",
-    examples: "Desarrolladores, diseñadores, agencias, e-commerce",
-    image:
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80",
+    description: "Software, agencias y desarrollo digital.",
+    image: "https://ik.imagekit.io/ov5b34jiy/bigdreamers_categories/technology.webp",
+    col: "md:col-span-4",
+    row: "md:row-span-2",
   },
   {
     title: "Belleza y Bienestar",
-    examples: "Peluquerías, spas, entrenadores, terapeutas",
+    description: "Peluquerías, spas y bienestar personal.",
     image:
-      "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&q=80",
+      "https://ik.imagekit.io/ov5b34jiy/catalogo/rostro.webp",
+    col: "md:col-span-4",
+    row: "md:row-span-3",
   },
-] as const;
+  {
+    title: "Finanzas e Inversiones",
+    description: "Asesoría financiera y gestión patrimonial.",
+    image: "https://ik.imagekit.io/ov5b34jiy/bigdreamers_categories/finances.webp",
+    col: "md:col-span-4",
+    row: "",
+  },
+  {
+    title: "Educación",
+    description: "Plataformas de aprendizaje y capacitación profesional.",
+    image:
+      "https://ik.imagekit.io/ov5b34jiy/bigdreamers_categories/education.webp",
+    col: "md:col-span-8",
+    row: "",
+  },
+];
 
 export const services = [
   {

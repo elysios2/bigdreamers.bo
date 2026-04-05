@@ -42,8 +42,8 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-4">Enlaces rápidos</h4>
             <ul className="space-y-2">
               {
-                links.map((link) => (
-                  <li>
+                links.map((link, index) => (
+                  <li key={index}>
                     <a href={link.href} className="text-gray-300 hover:text-white transition-colors">
                       {link.name}
                     </a>
